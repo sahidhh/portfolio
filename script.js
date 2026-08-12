@@ -4,34 +4,6 @@
   var prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* ---------------------------------------------
-     Subtle hero parallax on scroll (desktop only)
-  --------------------------------------------- */
-  var heroInner = document.querySelector("[data-parallax]");
-  var isMobile = window.matchMedia("(max-width: 640px)").matches;
-
-  if (heroInner && !prefersReducedMotion && !isMobile) {
-    var ticking = false;
-
-    function updateParallax() {
-      var scrollY = window.scrollY || window.pageYOffset;
-      var offset = Math.min(scrollY * 0.25, 120);
-      heroInner.style.transform = "translateY(" + offset + "px)";
-      ticking = false;
-    }
-
-    window.addEventListener(
-      "scroll",
-      function () {
-        if (!ticking) {
-          window.requestAnimationFrame(updateParallax);
-          ticking = true;
-        }
-      },
-      { passive: true }
-    );
-  }
-
-  /* ---------------------------------------------
      Scroll-reveal sections via IntersectionObserver
   --------------------------------------------- */
   var revealTargets = document.querySelectorAll(".reveal");
