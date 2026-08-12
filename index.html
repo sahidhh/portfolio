@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sahidhullah H — Backend Developer</title>
-<meta name="description" content="Sahidhullah H — Backend developer building CQRS/.NET systems by day, AI agent tooling and automation by night.">
+<title>Sahidhullah H — L2 Software Engineer</title>
+<meta name="description" content="Sahidhullah H — L2 Software Engineer building CQRS/.NET systems by day, AI agent tooling and automation by night.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%230a0a0a%22/><text x=%2250%22 y=%2268%22 font-size=%2258%22 text-anchor=%22middle%22 fill=%22%23f5a623%22 font-family=%22Arial,sans-serif%22>S</text></svg>">
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -18,6 +18,7 @@
     <ul class="nav-links">
       <li><a href="#experience" class="nav-link">Experience</a></li>
       <li><a href="#projects" class="nav-link">Projects</a></li>
+      <li><a href="#roadmap" class="nav-link">Roadmap</a></li>
       <li><a href="#skills" class="nav-link">Skills</a></li>
       <li><a href="#contact" class="nav-link">Contact</a></li>
     </ul>
@@ -30,8 +31,8 @@
     <div class="hero-inner" data-parallax>
       <p class="hero-eyebrow">Hi, I'm</p>
       <h1 class="hero-name">Sahidhullah H</h1>
-      <p class="hero-title">Backend Developer</p>
-      <p class="hero-tagline">Backend developer building CQRS/.NET systems by day, AI agent tooling and automation by night.</p>
+      <p class="hero-title">L2 Software Engineer</p>
+      <p class="hero-tagline">Building CQRS/.NET systems by day, shipping side projects and AI agent tooling by night.</p>
       <p class="hero-location">Chennai, Tamil Nadu, India</p>
       <div class="hero-cta">
         <a href="#projects" class="btn btn-primary">View Work</a>
@@ -47,11 +48,12 @@
 
       <article class="timeline-item">
         <div class="timeline-header">
-          <h3 class="timeline-role">Backend Developer</h3>
+          <h3 class="timeline-role">L2 Software Engineer <span class="timeline-badge">Promoted</span></h3>
           <span class="timeline-dates">August 2024 – Present</span>
         </div>
         <p class="timeline-meta">Propel Technologies · Chennai, India</p>
         <ul class="timeline-bullets">
+          <li>Promoted from Backend Developer to L2 Software Engineer, recognized for leading the CQRS/Clean Architecture migration and owning 8+ backend modules end-to-end.</li>
           <li>Migrated the backend of a B2B tax-review platform from a layered design to CQRS-based Clean Architecture, and redesigned/normalized the PostgreSQL schema modelling clients, engagements, and 5 review tools.</li>
           <li>Built most of the platform's .NET backend (8+ modules): Azure AD authentication, IRS-form version comparison, year-over-year comparison, summary and admin audit reporting, Excel export, activity tracking, bookmarks.</li>
           <li>Built the form-comparison pipeline: a .NET API uploads tax-form PDFs to Azure Blob Storage and tracks processing status/metadata, then triggers a Python worker that extracts and compares forms and stores differences with AI-generated analysis.</li>
@@ -84,6 +86,52 @@
     <h2 class="section-title">Projects</h2>
     <div class="project-grid">
 
+      <article class="project-card project-card-featured">
+        <span class="project-flag">Latest</span>
+        <h3 class="project-name">Freelance Radar</h3>
+        <p class="project-desc">Local-first freelance lead CRM — tracks leads, follow-ups, and pipeline stages entirely in the browser via IndexedDB, no backend or account required.</p>
+        <ul class="project-tags">
+          <li>React</li><li>TypeScript</li><li>Vite</li><li>IndexedDB</li>
+        </ul>
+        <div class="project-links">
+          <a class="project-link" href="https://freelance-radar-five.vercel.app" target="_blank" rel="noopener noreferrer">Live demo →</a>
+          <a class="project-link" href="https://github.com/sahidhh/freelance-radar" target="_blank" rel="noopener noreferrer">GitHub →</a>
+        </div>
+      </article>
+
+      <article class="project-card">
+        <h3 class="project-name">Job Discovery Pipeline</h3>
+        <p class="project-desc">Automated job scraping and matching pipeline — LinkedIn via Termux, Naukri via GitHub Actions, feeding a Telegram bot. Evolved into a Claude Code Routines-based tracker with dedup fingerprinting and dismissal tracking.</p>
+        <ul class="project-tags">
+          <li>TypeScript</li><li>GitHub Actions</li><li>Automation</li>
+        </ul>
+        <div class="project-links">
+          <a class="project-link" href="https://job-scraper-liart.vercel.app" target="_blank" rel="noopener noreferrer">Live demo →</a>
+          <a class="project-link" href="https://github.com/sahidhh/job-scraper" target="_blank" rel="noopener noreferrer">GitHub →</a>
+        </div>
+      </article>
+
+      <article class="project-card">
+        <h3 class="project-name">LinkedIn AI Reply Extension</h3>
+        <p class="project-desc">Browser extension that drafts AI-assisted reply suggestions directly inside LinkedIn's UI, streamlining networking and outreach.</p>
+        <ul class="project-tags">
+          <li>TypeScript</li><li>Browser Extension</li><li>AI</li>
+        </ul>
+        <a class="project-link" href="https://github.com/sahidhh/LinkedIn-AI-Reply-Extension" target="_blank" rel="noopener noreferrer">View on GitHub →</a>
+      </article>
+
+      <article class="project-card">
+        <h3 class="project-name">VideoDubber</h3>
+        <p class="project-desc">Video translation tool — "translate videos in your own voice, globalize in a click." Dubs content while preserving the speaker's own voice.</p>
+        <ul class="project-tags">
+          <li>TypeScript</li><li>Video</li><li>AI</li>
+        </ul>
+        <div class="project-links">
+          <a class="project-link" href="https://video-dubber-card-azure.vercel.app" target="_blank" rel="noopener noreferrer">Live demo →</a>
+          <a class="project-link" href="https://github.com/sahidhh/video-dubber-card" target="_blank" rel="noopener noreferrer">GitHub →</a>
+        </div>
+      </article>
+
       <article class="project-card">
         <h3 class="project-name">Profile Router</h3>
         <p class="project-desc">Zero-LLM TypeScript keyword classifier that routes requests across 7 profiles on OpenRouter, with an OpenRouter-first fallback chain, for cost-efficient LLM infrastructure.</p>
@@ -94,21 +142,23 @@
       </article>
 
       <article class="project-card">
-        <h3 class="project-name">Job Discovery Pipeline</h3>
-        <p class="project-desc">Automated job scraping and matching pipeline — LinkedIn via Termux, Naukri via GitHub Actions, feeding a Telegram bot. Evolved into a Claude Code Routines-based tracker with dedup fingerprinting and dismissal tracking, deployed as a static site on GitHub Pages.</p>
-        <ul class="project-tags">
-          <li>Python</li><li>GitHub Actions</li><li>Automation</li>
-        </ul>
-        <a class="project-link" href="https://github.com/sahidhh/job-scraper" target="_blank" rel="noopener noreferrer">View on GitHub →</a>
-      </article>
-
-      <article class="project-card">
         <h3 class="project-name">Learning Cards Generator</h3>
         <p class="project-desc">Turns any topic or document into structured, bite-sized learning cards for mobile micro-learning, with Feed/Deck modes and ZIP export.</p>
         <ul class="project-tags">
-          <li>Content pipeline</li><li>Mobile-first</li>
+          <li>TypeScript</li><li>Content pipeline</li><li>Mobile-first</li>
         </ul>
-        <a class="project-link" href="https://github.com/sahidhh/learning-card-generator" target="_blank" rel="noopener noreferrer">View on GitHub →</a>
+        <div class="project-links">
+          <a class="project-link" href="https://learning-card-generator.vercel.app" target="_blank" rel="noopener noreferrer">Live demo →</a>
+          <a class="project-link" href="https://github.com/sahidhh/learning-card-generator" target="_blank" rel="noopener noreferrer">GitHub →</a>
+        </div>
+      </article>
+
+      <article class="project-card">
+        <h3 class="project-name">PDF Comparison Tool</h3>
+        <p class="project-desc">FastAPI + PyMuPDF + pytesseract web app for document comparison — the personal-project seed that grew into the form-comparison pipeline built at Propel.</p>
+        <ul class="project-tags">
+          <li>FastAPI</li><li>PyMuPDF</li><li>OCR</li>
+        </ul>
       </article>
 
       <article class="project-card">
@@ -119,15 +169,45 @@
         </ul>
       </article>
 
-      <article class="project-card">
-        <h3 class="project-name">PDF Comparison Tool</h3>
-        <p class="project-desc">Local FastAPI + PyMuPDF + pytesseract web app for document comparison.</p>
-        <ul class="project-tags">
-          <li>FastAPI</li><li>PyMuPDF</li><li>OCR</li>
-        </ul>
-      </article>
-
     </div>
+  </section>
+
+  <section id="roadmap" class="section reveal">
+    <h2 class="section-title">Deploy Queue</h2>
+    <p class="roadmap-intro">Repos with real substance that are one push away from being genuinely useful — the backlog for the next few weekends.</p>
+    <ul class="roadmap-list">
+
+      <li class="roadmap-item">
+        <span class="roadmap-name">Patients Info Dashboard</span>
+        <span class="roadmap-note">Solid CRUD/dashboard app, but the live demo has gone dark — needs a Vercel redeploy to bring it back online.</span>
+      </li>
+
+      <li class="roadmap-item">
+        <span class="roadmap-name">Finance Manager (MERN)</span>
+        <span class="roadmap-note">A full MERN personal-finance tracker sitting undeployed — hosting the API and client would make it demo-able.</span>
+      </li>
+
+      <li class="roadmap-item">
+        <span class="roadmap-name">AI Dev Platform</span>
+        <span class="roadmap-note">The most ambitious repo by size, with no live demo or public write-up yet — needs scoped docs and a shipped MVP.</span>
+      </li>
+
+      <li class="roadmap-item">
+        <span class="roadmap-name">LinkedIn AI Reply Extension</span>
+        <span class="roadmap-note">Mature enough to package as an actual (even unlisted) Chrome Web Store extension instead of just a repo.</span>
+      </li>
+
+      <li class="roadmap-item">
+        <span class="roadmap-name">Job Hunt App + Benchmark</span>
+        <span class="roadmap-note">Two smaller Python tools that overlap with the job-scraper suite — worth consolidating and open-sourcing the useful parts.</span>
+      </li>
+
+      <li class="roadmap-item">
+        <span class="roadmap-name">Weather App (Next.js)</span>
+        <span class="roadmap-note">Working weather lookup on the Weather Union API — just needs a README, screenshot, and a deploy-status check.</span>
+      </li>
+
+    </ul>
   </section>
 
   <section id="skills" class="section reveal">
@@ -151,7 +231,7 @@
       <div class="skills-group">
         <h3 class="skills-group-title">Frontend</h3>
         <ul class="skills-list">
-          <li>Angular</li><li>React.js</li><li>HTML5</li><li>CSS3</li>
+          <li>Angular</li><li>React.js</li><li>Next.js</li><li>Vite</li><li>HTML5</li><li>CSS3</li>
         </ul>
       </div>
 
@@ -184,10 +264,16 @@
 <footer id="contact" class="site-footer">
   <h2 class="section-title">Contact</h2>
   <ul class="contact-links">
-    <li><a href="mailto:sahidhullah@gmail.com">sahidhullah@gmail.com</a></li>
+    <li><a href="mailto:sahidhh5@gmail.com">sahidhh5@gmail.com</a></li>
     <li><a href="https://github.com/sahidhh" target="_blank" rel="noopener noreferrer">GitHub</a></li>
     <li><a href="https://www.linkedin.com/in/sahidh-h/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
   </ul>
+  <p class="footer-secondary">
+    Also on
+    <a href="https://www.codechef.com/users/sahidhh5" target="_blank" rel="noopener noreferrer">CodeChef</a>
+    ·
+    <a href="https://www.hackerrank.com/profile/sahidhh5" target="_blank" rel="noopener noreferrer">HackerRank</a>
+  </p>
   <p class="footer-note">&copy; 2026 Sahidhullah H. Built with plain HTML, CSS &amp; JS.</p>
 </footer>
 
