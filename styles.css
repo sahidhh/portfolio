@@ -531,6 +531,20 @@ img { max-width: 100%; display: block; }
 .contact-links a:focus-visible::after {
   transform: scaleX(1);
 }
+.footer-secondary {
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  margin-bottom: var(--space-sm);
+}
+.footer-secondary a {
+  color: var(--text-dim);
+  font-weight: 600;
+  transition: color var(--transition-fast);
+}
+.footer-secondary a:hover,
+.footer-secondary a:focus-visible {
+  color: var(--accent);
+}
 .footer-note {
   color: var(--text-dim);
   font-size: 0.8rem;
