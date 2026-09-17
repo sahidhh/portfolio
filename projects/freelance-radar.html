@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Freelance Radar — Sahidhullah H</title>
+<meta name="description" content="Case study: a local-first freelance CRM with no server, on purpose.">
+<link rel="canonical" href="https://sahidhh.github.io/portfolio/projects/freelance-radar.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Freelance Radar — Sahidhullah H">
+<meta property="og:description" content="Case study: a local-first freelance CRM with no server, on purpose.">
+<meta property="og:url" content="https://sahidhh.github.io/portfolio/projects/freelance-radar.html">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#0c111c">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2222%22 fill=%22%230c111c%22/><text x=%2250%22 y=%2270%22 font-size=%2258%22 text-anchor=%22middle%22 fill=%22%23e6b96a%22 font-family=%22Inter,Segoe UI,sans-serif%22 font-weight=%22700%22>S</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.15.0/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark",themeVariables:{background:"transparent",primaryColor:"#1a2130",primaryTextColor:"#f3f5f9",primaryBorderColor:"#3a4a66",lineColor:"#9aa4b5",fontFamily:"Inter, sans-serif"},flowchart:{htmlLabels:true,curve:"basis"}});</script>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<a class="skip" href="#main">Skip to content</a>
+<main class="cs" id="main">
+  <p class="crumb"><a href="../index.html#projects">← Sahidhullah H · Projects</a></p>
+  <div class="cs-head">
+    <div>
+      <h1>Freelance Radar: a CRM with no server, on purpose</h1>
+      <p class="sub">Find leads, qualify them, draft outreach, track follow-ups — entirely in the browser. Every status has exactly one next action, so the dashboard always tells you what to do.</p>
+    </div>
+    <div class="meta">
+      <div><b>Role</b> <span>Solo</span></div>
+      <div><b>Stack</b> <span>React 19, TypeScript, Vite, Tailwind 4, idb, Vitest</span></div>
+      <div><b>Storage</b> <span>IndexedDB only; JSON/CSV export with schema versioning</span></div>
+      <div><a class="live" href="https://freelance-radar-five.vercel.app" target="_blank" rel="noopener">Live</a><a href="https://github.com/sahidhh/freelance-radar" target="_blank" rel="noopener">Source</a></div>
+    </div>
+  </div>
+
+  <div class="cs-body">
+    <h2>Why I built it</h2>
+    <div>
+      <p>Freelance CRMs want an account, a subscription, and my prospects' data on their server. For one person with twenty leads that's the wrong trade. I wanted a tool that works offline, costs nothing to run, and can be deleted without a trace.</p>
+    </div>
+  </div>
+
+  <div class="cs-body">
+    <h2>The problem</h2>
+    <div>
+      <p>Not "build a CRM" — build the smallest thing that answers <b>"what should I do next?"</b> every time it opens, and refuse every feature that needs a server to work.</p>
+    </div>
+  </div>
+
+  <div class="cs-body">
+    <h2>How it works</h2>
+    <div class="wide">
+      <pre class="mermaid">
+flowchart LR
+  F[public job feeds\nRemoteOK, Remotive, Arbeitnow, JobDataLake] --> D[Discover]
+  D -->|one click| L[Lead]
+  L --> Q[qualify: score + reason\noptional PageSpeed audit of their site]
+  Q --> O[Outreach\nresearch prompt → draft → mailto]
+  O --> FU[follow up]
+  FU --> P[Project\nvalue, dates, payments]
+  L & Q & O & FU & P --- DB[(IndexedDB\nleads · outreach · projects · activities)]
+      </pre>
+      <p style="max-width:66ch">Pages never touch IndexedDB directly — a <code>db/</code> layer owns the four stores and export/import. Pure logic (next action, outreach templates, DM budget pacing, feed normalisers) lives in <code>lib/</code> and is tested against captured real API responses.</p>
+    </div>
+  </div>
+
+  <div class="cs-body">
+    <h2>Screens</h2>
+    <div class="wide">
+      <div class="shots">
+        <div>
+          <div class="ui"><div class="ui-bar"><i></i><i></i><i></i><span>Dashboard</span></div>
+            <div class="ui-body">
+              <div class="tiles"><div class="tile"><small>Pipeline value</small><b>$4,200</b></div><div class="tile"><small>Qualified</small><b>6</b></div><div class="tile"><small>Follow-ups today</small><b>2</b></div></div>
+              <div class="ui-list">
+                <div><span>Follow up — Northwind Bakery (no reply, day 4)</span><em>today</em></div>
+                <div><span>Send outreach — Kavya Dental, draft ready</span><em>today</em></div>
+                <div><span>Research — Harbor Yoga Studio</span><em>Sep 19</em></div>
+              </div>
+            </div></div>
+          <p class="ui-cap"><b>Dashboard.</b> Not a chart page — a list of verbs, ordered by due date.</p>
+        </div>
+        <div>
+          <div class="ui"><div class="ui-bar"><i></i><i></i><i></i><span>Pipeline</span></div>
+            <div class="ui-body"><div class="kan">
+              <div><strong class="kh">New → qualify</strong><p>Harbor Yoga<small>found via Remotive</small></p><p>Delta Tiles<small>referral</small></p></div>
+              <div><strong class="kh">Qualified → research</strong><p>Kavya Dental<small>score 78</small></p></div>
+              <div><strong class="kh">Contacted → follow up</strong><p>Northwind Bakery<small>day 4</small></p><p>Pixel Print<small>day 1</small></p></div>
+              <div><strong class="kh">Won → project</strong><p>Ola Studio<small>$1,800</small></p></div>
+            </div></div></div>
+          <p class="ui-cap"><b>Pipeline.</b> Each column header is its next action.</p>
+        </div>
+        <div>
+          <div class="ui"><div class="ui-bar"><i></i><i></i><i></i><span>Lead · Kavya Dental</span></div>
+            <div class="ui-body"><div class="ui-list">
+              <div><span>Score</span><em><span class="chip hi">78</span> slow site, no booking form</em></div>
+              <div><span>PageSpeed (mobile)</span><em><span class="chip no">41</span> LCP 6.2 s</em></div>
+              <div><span>Next action</span><em>Send outreach</em></div>
+              <div><span>Draft</span><em>"Your site takes 6 s to load on mobile…"</em></div>
+              <div><span>Send</span><em><span class="chip ok">opens mailto:</span></em></div>
+            </div></div></div>
+          <p class="ui-cap"><b>Lead detail.</b> The audit gives a concrete pitch; the app never sends anything itself.</p>
+        </div>
+      </div>
+      <p style="color:var(--ink-2);font-size:14px">Prototype screens with sample leads; a fresh install is empty by design — nothing is stored anywhere but your browser.</p>
+    </div>
+  </div>
+
+
+  <div class="cs-body">
+    <h2>Decisions that mattered</h2>
+    <div>
+      <ul class="decisions">
+        <li><b>One next action per status.</b> The pipeline isn't a Kanban for its own sake; each column implies a verb. The dashboard is a list of verbs.</li>
+        <li><b>Deliberately excluded, in writing:</b> auth, server DB, automated sending, LinkedIn/Upwork automation, scraping, AI agents. External services are used by hand, never as runtime dependencies. The list is in <code>docs/requirements.md</code> so future-me can't quietly add them.</li>
+        <li><b>Adversarial reviews before each phase.</b> An HN parser and an Instagram lead-sourcing pipeline were designed, reviewed, and cut. The review notes are in the repo alongside the plans that survived.</li>
+        <li><b>Export with schema versioning.</b> Local-first means the data can be lost with the browser profile. JSON and CSV export carry a version so imports stay valid after the schema changes.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="cs-body">
+    <h2>Results</h2>
+    <div class="wide">
+      <div class="results">
+        <div><b>$0</b><span>infrastructure — static hosting, no backend</span></div>
+        <div><b>0</b><span>bytes of prospect data leave the device</span></div>
+        <div><b>100%</b><span>of data exportable — JSON and CSV, schema-versioned</span></div>
+      </div>
+    </div>
+  </div>
+
+  <p class="ask">Want the longer version, or the parts I left out? <a href="mailto:sahidhullah@gmail.com">sahidhullah@gmail.com</a></p>
+  <div class="next"><a href="pdf-diff.html">← PDF Diff Tool</a><a href="../index.html#projects">All projects →</a></div>
+</main>
+</body>
+</html>
