@@ -38,7 +38,6 @@
   .skip { position: absolute; left: -9999px; top: 8px; background: var(--ink); color: var(--paper); padding: 8px 12px; border-radius: 4px; z-index: 20; }
   .skip:focus { left: 12px; }
   .ask { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--rule); font-size: 16px; max-width: 60ch; }
-  .resume-hint { display: block; padding: 4px 10px 6px; color: var(--ink-2); font-size: 12px; border-bottom: 1px solid var(--rule); margin-bottom: 4px; }
 
   /* top bar */
   .bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10; background: var(--paper); border-bottom: 1px solid var(--rule); }
@@ -47,15 +46,8 @@
   .bar nav { display: flex; gap: 22px; font-size: 15px; }
   .bar nav a { text-decoration: none; color: var(--ink-2); }
   .bar nav a:hover { color: var(--ink); text-decoration: underline; }
-  .resume { display: inline-flex; align-items: center; gap: 8px; background: var(--ink); color: var(--paper); text-decoration: none; padding: 8px 14px; border-radius: 4px; font-size: 15px; font-weight: 500; }
-  .resume:hover { background: var(--ink-2); }
-  .resume-wrap { position: relative; }
-  .resume-wrap summary { list-style: none; cursor: pointer; }
-  .resume-wrap summary::-webkit-details-marker { display: none; }
-  .resume-list { position: absolute; right: 0; top: calc(100% + 6px); min-width: 210px; background: var(--paper); border: 1px solid var(--rule); border-radius: 4px; padding: 6px; display: grid; }
-  .resume-list a { text-decoration: none; padding: 8px 10px; border-radius: 3px; font-size: 15px; }
-  .resume-list a:hover { background: var(--paper-2); }
-  .resume-list small { display: block; color: var(--ink-2); font-size: 12.5px; }
+  .resume { font-size: 15px; color: var(--ink-2); white-space: nowrap; }
+  .resume:hover { color: var(--ink); }
 
   /* hero */
   .hero { padding-block: 64px 40px; }
