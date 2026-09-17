@@ -3,7 +3,7 @@
 Backend & AI Systems Engineer
 
 Chennai, India (IST) | Open to Remote — Worldwide | Available for US/EU hours overlap | Full-time or Contract
-+91 97894 42466 | sahidhullah@gmail.com | linkedin.com/in/sahidh-h | github.com/sahidhh
+sahidhullah@gmail.com | linkedin.com/in/sahidh-h | github.com/sahidhh
 
 ---
 
@@ -15,7 +15,7 @@ Backend engineer (2 yrs) working across Python and .NET, focused on LLM-integrat
 
 ## EXPERIENCE
 
-**Propel Technologies** — Backend Developer
+**Propel Technologies** — L2 Software Engineer (promoted from Backend Developer, 2025)
 Chennai, India | Aug 2024 – Present
 
 - Built the document-comparison pipeline for a B2B tax-review platform: a .NET REST API uploads tax-form PDFs to Azure Blob Storage and tracks processing status, then triggers a Python worker that extracts, compares, and stores form differences with an LLM-generated summary of each change — processing 500+ documents per review cycle.
@@ -43,14 +43,13 @@ github.com/sahidhh/profile-router
 - Reduced inference spend by roughly 60% by routing retrieval and quick-fix prompts to cheap models while reserving stronger models for architecture and review work.
 - Wrote unit, reachability, and regression tests that fail the build when a new keyword makes one profile outrank another on its own trigger prompt.
 
-**Job Aggregation Pipeline** — Python, SQLite, sentence-transformers, Gemini API
-github.com/sahidhh/jobhunt
+**Job Discovery Pipeline** — TypeScript, Next.js 15, Supabase, GitHub Actions, OpenRouter
+github.com/sahidhh/job-scraper
 
-- Aggregates job listings from public ATS board APIs (Greenhouse, Lever, Ashby) and open datasets, normalizing every source into a single job schema with a stable ID for deduplication.
-- Ranks listings against a parsed resume using a hybrid score: sentence-transformer embeddings plus explicit skill overlap.
-- Caches resume parsing by file hash in SQLite so each document is parsed exactly once, and routes all LLM calls through a provider-agnostic abstraction layer.
-- Delivers ranked matches to a Telegram bot on a GitHub Actions schedule, keeping inference cost near zero across 100+ listings processed per day.
-
+- Scrapes six job boards (Greenhouse, Lever, Ashby, Wellfound, RemoteOK, MyCareersFuture) twice daily on GitHub Actions, normalizing every source into one schema with a stable ID for deduplication.
+- Scores postings in two stages: a free keyword-overlap gate against skills extracted from an uploaded resume PDF, then an LLM call with reasoning only for postings above the threshold; scores persist per (job, role) so re-runs never re-score.
+- Delivers one Telegram digest per run with inline Apply buttons; a notifications log guarantees at-most-once delivery across workflow retries.
+- Dashboard surfaces skill gaps (what matched jobs need that the resume lacks) and skill demand across matches.
 **Learning Card Generator** — TypeScript, JSON Schema, jsPDF
 github.com/sahidhh/learning-card-generator
 

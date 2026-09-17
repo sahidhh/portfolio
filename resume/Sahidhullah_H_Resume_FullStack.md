@@ -3,7 +3,7 @@
 Full Stack Developer — .NET + Angular / React
 
 Chennai, India (IST) | Open to Remote — Worldwide | Available for US/EU hours overlap | Full-time or Contract
-+91 97894 42466 | sahidhullah@gmail.com | linkedin.com/in/sahidh-h | github.com/sahidhh
+sahidhullah@gmail.com | linkedin.com/in/sahidh-h | github.com/sahidhh
 
 ---
 
@@ -15,7 +15,7 @@ Full stack developer (2 yrs) building B2B web platforms end to end — .NET / CQ
 
 ## EXPERIENCE
 
-**Propel Technologies** — Full Stack Developer
+**Propel Technologies** — L2 Software Engineer (promoted from Backend Developer, 2025)
 Chennai, India | Aug 2024 – Present
 
 *B2B tax-review platform (.NET, PostgreSQL, Angular, Azure)*
@@ -31,7 +31,11 @@ Chennai, India | Aug 2024 – Present
 - Developed 10+ reusable Angular components — collapsible lists, dropdowns, modal overlays, and shared table layouts — consumed across multiple review tools.
 - Integrated the Angular frontend with the .NET REST APIs, handling auth flows, loading and error states, and paginated data.
 
-*Pharmacy & e-commerce platform (.NET, SQL Server)*
+*Commercial healthcare ecosystem (React Native/Expo, React + Vite/TS, .NET, PostgreSQL, Python)*
+
+- Worked across an end-to-end healthcare platform: patient app for Android and iOS, web portals for healthcare data admins, receptionists and doctors, and a pharmacy back office — one .NET backend and one PostgreSQL schema behind all of them.
+- Built doctor scheduling with a custom calendar and role-based access control separating admin, receptionist and doctor views; in-app e-commerce and lab-test booking.
+- Pharmacy portal: stock management, order processing, payments, prescription review, bill generation and delivery-partner setup; Python services for document processing and generation.
 - Designed 20+ REST APIs, reducing response times by ~80% through query optimization and caching.
 
 **Mallow Technologies** — Frontend Developer Intern
@@ -51,12 +55,11 @@ github.com/sahidhh/learning-card-generator
 - Defined a typed JSON schema of 10+ card types (concept, analogy, code, quiz, comparison, recap) as the contract between the content source and the renderer.
 - Implemented ZIP export producing a vector-text PDF, JSON, and Markdown, replacing a screenshot-based PDF with selectable, searchable output ~10x smaller in file size.
 
-**Job Aggregation Pipeline** — Python, SQLite, GitHub Actions
-github.com/sahidhh/jobhunt
+**Job Discovery Pipeline** — TypeScript, Next.js 15, Supabase, Tailwind, GitHub Actions
+github.com/sahidhh/job-scraper
 
-- Aggregates job listings from public ATS board APIs (Greenhouse, Lever, Ashby), normalizing every source into a single schema with a stable ID for deduplication.
-- Ranks listings against a parsed resume using embeddings plus explicit skill overlap, and delivers ranked matches to a Telegram bot on a GitHub Actions schedule.
-
+- Next.js dashboard with filterable job table, bulk status updates, resume upload with skill extraction, and skill-gap analytics on top of a Supabase Postgres schema.
+- GitHub Actions scrape six boards twice daily, score in two stages (keyword gate, then LLM), and send one Telegram digest per run with at-most-once delivery.
 ---
 
 ## TECHNICAL SKILLS

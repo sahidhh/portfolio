@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profile Router — Sahidhullah H</title>
+<meta name="description" content="Case study: routing every AI-agent prompt to the right model with zero LLM calls in the classifier.">
+<link rel="canonical" href="https://sahidhh.github.io/portfolio/projects/profile-router.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Profile Router — Sahidhullah H">
+<meta property="og:description" content="Case study: routing every AI-agent prompt to the right model with zero LLM calls in the classifier.">
+<meta property="og:url" content="https://sahidhh.github.io/portfolio/projects/profile-router.html">
+<meta name="twitter:card" content="summary">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2212%22 fill=%22%23ffe566%22/><text x=%2250%22 y=%2270%22 font-size=%2258%22 text-anchor=%22middle%22 fill=%22%231b2431%22 font-family=%22Public Sans,Segoe UI,sans-serif%22 font-weight=%22700%22>S</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,500;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.1/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:matchMedia("(prefers-color-scheme: dark)").matches?"dark":"neutral",flowchart:{htmlLabels:true,curve:"basis"}});</script>
+</head>
+<body>
+<header class="bar">
+  <div class="wrap">
+    <strong><a href="../index.html">Sahidhullah H</a></strong>
+    <nav aria-label="Sections">
+      <a href="../index.html#work">Work</a><a href="../index.html#projects">Projects</a><a href="../index.html#automation">Automation</a><a href="../index.html#contact">Contact</a>
+    </nav>
+    <details class="resume-wrap">
+      <summary class="resume">Resume ▾</summary>
+      <div class="resume-list"><small class="resume-hint">Markdown, opens on GitHub</small>
+        <a href="https://github.com/sahidhh/portfolio/blob/main/resume/Sahidhullah_H_Resume_DotNet.md" target="_blank" rel="noopener">.NET backend<small>Default — CQRS, EF Core, Azure</small></a>
+        <a href="https://github.com/sahidhh/portfolio/blob/main/resume/Sahidhullah_H_Resume_AI-Python.md" target="_blank" rel="noopener">Backend + AI systems<small>Python pipelines, LLM tooling</small></a>
+        <a href="https://github.com/sahidhh/portfolio/blob/main/resume/Sahidhullah_H_Resume_FullStack.md" target="_blank" rel="noopener">Full stack<small>.NET + Angular/React</small></a>
+      </div>
+    </details>
+  </div>
+</header>
+<main class="wrap cs-page">
+  <p class="crumb"><a href="../index.html#projects">← Projects</a></p>
+  <div class="cs-head">
+    <div>
+      <h1>Profile Router: pick the model before the model gets to think</h1>
+      <p class="sub">An extension for OMP, the coding-agent CLI I use daily, that classifies every prompt with plain keyword scoring — no LLM in the loop — then sets model, thinking level, tools and rules for that one turn.</p>
+    </div>
+    <div class="meta">
+      <div><b>Role</b> <span>Solo — design, code, tests, docs</span></div>
+      <div><b>Stack</b> <span>TypeScript, Node built-ins only</span></div>
+      <div><b>Size</b> <span>1 source file + 1 JSON table</span></div>
+      <div><a href="https://github.com/sahidhh/profile-router" target="_blank" rel="noopener">Source</a><a href="https://github.com/sahidhh/profile-router/blob/main/DECISIONS.md" target="_blank" rel="noopener">Decision log</a></div>
+    </div>
+  </div>
+
+  <div class="cs-body">
+    <h2>Why I built it</h2>
+    <div>
+      <p>In early July 2026 I spent a week designing something I called an Engineering Knowledge Compiler: a vendor-neutral library of engineering profiles, model tiers and escalation rules, plus a six-pass compiler to turn them into config for any AI coding agent. Fourteen spec files, about 300 KB of markdown. No code.</p>
+      <p>Then I asked, twice, whether it needed to exist next to what already shipped. Honest answer: the only piece I would use every day was the routing table — which model, which tools, for which kind of prompt. Everything else was me enjoying architecture.</p>
+      <p>So I salvaged the profile definitions and the keyword table out of the specs and wrote the smallest thing that would run: one TypeScript file, one JSON table, no dependencies. First commit July 10, working extension July 11. A week later I formally killed the vendor-neutral charter in the decision log — it had stopped earning its complexity.</p>
+    </div>
+  </div>
+
+  <div class="cs-body">
+    <h2>The problem</h2>
+    <div>
+      <p>Route each prompt to a cheap model when it's safe and a strong one when it matters — <b>without spending an LLM call to decide</b>, which would eat the savings, and without ever routing a destructive action to the cheap tier.</p>
+    </div>
+  </div>
+
+  <div class="cs-body">
+    <h2>How it works</h2>
+    <div class="wide">
+      <pre class="mermaid">
+flowchart LR
+  P[prompt] --> C[classify\nword-boundary keyword scores\nno LLM]
+  C --> M[merge matched profiles]
+  M --> R[rules → system prompt\nthis turn only]
+  M --> MD[model chain\ncheap primary → fallback]
+  M --> T[thinking level]
+  M --> TL[toolset restricted 🔒]
+  M --> A[disabled subagents blocked]
+      </pre>
+      <p style="max-width:66ch">Seven profiles live in <code>bundles.json</code>: <code>lookup</code>, <code>hotfix</code>, <code>investigation</code>, <code>implementation</code>, <code>architecture</code>, <code>review</code>, <code>premium</code>. Each has trigger keywords, a model chain, a thinking level and an allowed toolset. When several match, rules and tools <b>union</b>; disabled subagents <b>intersect</b> (safety-conservative); model and thinking go to the highest score.</p>
+      <div class="demo">
+        <div class="demo-head"><span>prompt</span><span>routed to</span></div>
+        <div class="demo-body">
+          <div>where is the retry logic for blob uploads?</div>
+          <div><ins>lookup</ins> <span class="dim">· gemini-2.5-flash-lite · thinking: low · tools: read, grep, glob, lsp</span></div>
+        </div>
+        <div class="demo-body" style="border-top:1px solid var(--rule)">
+          <div>what is the schema of the users table</div>
+          <div><ins>lookup</ins> <span class="dim">· "schema" alone scores 1, premium needs 2 — stays cheap</span></div>
+        </div>
+        <div class="demo-body" style="border-top:1px solid var(--rule)">
+          <div>rotate the api key and force-push the cleanup branch</div>
+          <div><ins>premium</ins> <span class="dim">· Opus, no fallback · two weight-2 destructive scopes</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cs-body">
+    <h2>Screens</h2>
+    <div class="wide">
+      <div class="shots">
+        <div>
+          <div class="ui"><div class="ui-bar"><i></i><i></i><i></i><span>omp — status line</span></div>
+<div class="term"><span class="p">›</span> where is the retry logic for blob uploads?
+<span class="p">⚙ lookup 🔒 · gemini-2.5-flash-lite · low</span>
+
+<span class="p">›</span> refactor the upload service to use the new client
+<span class="p">⚙ implementation · minimax-m3 · medium</span>
+
+<span class="p">›</span> rotate the api key and force-push cleanup
+<span class="p">⚙ </span><span class="y">premium</span><span class="p"> · claude-opus · high</span></div></div>
+          <p class="ui-cap"><b>Status line.</b> What matched, which model, 🔒 when tools were restricted.</p>
+        </div>
+        <div>
+          <div class="ui"><div class="ui-bar"><i></i><i></i><i></i><span>/profile</span></div>
+<div class="term"><span class="p">last prompt:</span> what is the schema of the users table
+
+profile          score  min  hit
+<span class="y">lookup</span>             3    1  what is, schema
+premium            1    2  schema
+architecture       0    1  —
+
+<span class="p">→ lookup (margin 2). premium below minScore.</span></div></div>
+          <p class="ui-cap"><b>/profile.</b> Score table for the last prompt; shows why the bare noun stayed cheap.</p>
+        </div>
+        <div>
+          <div class="ui"><div class="ui-bar"><i></i><i></i><i></i><span>confirm</span></div>
+            <div class="ui-body"><div class="dialog"><b>Switch model: minimax-m3 → claude-opus?</b><p>This prompt matched <code>premium</code>. Upgrades ask once per pair; downgrades never ask.</p><div class="btns"><span>Not now</span><span class="pri">Switch, remember</span></div></div></div></div>
+          <p class="ui-cap"><b>Upgrade confirm.</b> Shown once per (from → to) pair, persisted across sessions.</p>
+        </div>
+      </div>
+      <p style="color:var(--ink-2);font-size:14px">Prototype screens drawn in CSS with sample prompts; the real thing is a terminal.</p>
+    </div>
+  </div>
+
+
+  <div class="cs-body">
+    <h2>Decisions that mattered</h2>
+    <div>
+      <ul class="decisions">
+        <li><b>Keyword scoring, not an LLM classifier.</b> Routing that costs tokens defeats the purpose. Word-boundary matching plus per-keyword weights got within acceptable accuracy for free.</li>
+        <li><b><code>premium</code> has a minimum score of 2.</b> Early versions sent every prompt containing "schema" or "secret" to the expensive tier. A bare noun now needs a second signal; single destructive verbs (<code>force-push</code>, <code>reset --hard</code>) are weight 2 on their own.</li>
+        <li><b>Downgrades apply silently, upgrades confirm once.</b> Nobody wants a dialog to use the cheap model. Going up costs money, so it asks — once per (from→to) pair, persisted across sessions.</li>
+        <li><b>Fallback chains, and <code>premium</code> has none.</b> Cheap tiers chain through providers until one has credentials. The safety tier deliberately cannot fall down to a cheaper model.</li>
+        <li><b>Tests that guard the table, not just the code.</b> A reachability test proves every profile's trigger prompt reaches that profile; a regression test fails the build if adding a keyword lets another profile outrank it.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="cs-body">
+    <h2>Results</h2>
+    <div class="wide">
+      <div class="results">
+        <div><b>~60%</b><span>lower inference spend than routing everything to the premium tier, over a month of normal use</span></div>
+        <div><b>0</b><span>LLM calls spent on routing</span></div>
+        <div><b>7</b><span>profiles, all reachable by test</span></div>
+        <div><b>1 file</b><span>Node built-ins only, no dependencies</span></div>
+      </div>
+    </div>
+  </div>
+
+  <p class="ask">Want the longer version, or the parts I left out? <a href="mailto:sahidhullah@gmail.com">sahidhullah@gmail.com</a></p>
+  <div class="next"><a href="../index.html#projects">← All projects</a><a href="job-pipeline.html">Next: Job Discovery Pipeline →<small>six boards, two-stage scoring, one digest</small></a></div>
+</main>
+<footer class="wrap">© 2026 Sahidhullah H · Plain HTML and CSS; Mermaid draws the diagrams.</footer>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Job Discovery Pipeline — Sahidhullah H</title>
+<meta name="description" content="Case study: six job boards, two-stage scoring, one Telegram digest, at-most-once delivery.">
+<link rel="canonical" href="https://sahidhh.github.io/portfolio/projects/job-pipeline.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Job Discovery Pipeline — Sahidhullah H">
+<meta property="og:description" content="Case study: six job boards, two-stage scoring, one Telegram digest, at-most-once delivery.">
+<meta property="og:url" content="https://sahidhh.github.io/portfolio/projects/job-pipeline.html">
+<meta name="twitter:card" content="summary">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2212%22 fill=%22%23ffe566%22/><text x=%2250%22 y=%2270%22 font-size=%2258%22 text-anchor=%22middle%22 fill=%22%231b2431%22 font-family=%22Public Sans,Segoe UI,sans-serif%22 font-weight=%22700%22>S</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,500;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.1/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:matchMedia("(prefers-color-scheme: dark)").matches?"dark":"neutral",flowchart:{htmlLabels:true,curve:"basis"}});</script>
+</head>
+<body>
+<header class="bar">
+  <div class="wrap">
+    <strong><a href="../index.html">Sahidhullah H</a></strong>
+    <nav aria-label="Sections">
+      <a href="../index.html#work">Work</a><a href="../index.html#projects">Projects</a><a href="../index.html#automation">Automation</a><a href="../index.html#contact">Contact</a>
+    </nav>
+    <details class="resume-wrap">
+      <summary class="resume">Resume ▾</summary>
+      <div class="resume-list"><small class="resume-hint">Markdown, opens on GitHub</small>
+        <a href="https://github.com/sahidhh/portfolio/blob/main/resume/Sahidhullah_H_Resume_DotNet.md" target="_blank" rel="noopener">.NET backend<small>Default — CQRS, EF Core, Azure</small></a>
+        <a href="https://github.com/sahidhh/portfolio/blob/main/resume/Sahidhullah_H_Resume_AI-Python.md" target="_blank" rel="noopener">Backend + AI systems<small>Python pipelines, LLM tooling</small></a>
+        <a href="https://github.com/sahidhh/portfolio/blob/main/resume/Sahidhullah_H_Resume_FullStack.md" target="_blank" rel="noopener">Full stack<small>.NET + Angular/React</small></a>
+      </div>
+    </details>
+  </div>
+</header>
+<main class="wrap cs-page">
+  <p class="crumb"><a href="../index.html#projects">← Projects</a></p>
+  <div class="cs-head">
+    <div>
+      <h1>Job Discovery Pipeline: only see the postings that match</h1>
+      <p class="sub">Scrapes six boards on a schedule, scores each posting against my actual resume in two stages, and sends one Telegram message a run. Dashboard for status tracking and skill-gap analysis.</p>
+    </div>
+    <div class="meta">
+      <div><b>Role</b> <span>Solo</span></div>
+      <div><b>Stack</b> <span>Next.js 15, TypeScript strict, Supabase, GitHub Actions, OpenRouter, Telegram Bot API</span></div>
+      <div><b>Status</b> <span>In daily use since July 2026</span></div>
+      <div><a class="live" href="https://job-scraper-liart.vercel.app" target="_blank" rel="noopener">Live</a><a href="https://github.com/sahidhh/job-scraper" target="_blank" rel="noopener">Source</a></div>
+    </div>
+  </div>
+
+  <div class="cs-body">
+    <h2>Why I built it</h2>
+    <div>
+      <p>Job boards optimize for time-on-site. I wanted the opposite: zero minutes browsing, and a short list I trust. The first version was a LinkedIn scraper running in Termux on my phone. It worked, but it was mine only, had no memory, and re-showed the same postings.</p>
+    </div>
+  </div>
+
+  <div class="cs-body">
+    <h2>The problem</h2>
+    <div>
+      <p>Scoring every posting with an LLM is accurate but costs money on hundreds of listings a day, most of which are obviously irrelevant. Sending alerts from a cron job risks duplicates on every retry. And a scraper with no database can't tell "new" from "seen".</p>
+    </div>
+  </div>
+
+  <div class="cs-body">
+    <h2>How it works</h2>
+    <div class="wide">
+      <pre class="mermaid">
+flowchart LR
+  subgraph cron [GitHub Actions · 06:00 / 14:00 UTC]
+    S[scrape.ts] --> K[keyword score\nfree, always]
+    K -->|≥ 0.25| AI[LLM score\nOpenRouter]
+    K -->|below| X[skip]
+    AI --> N[notify.ts]
+  end
+  B[(6 boards)] --> S
+  S -->|upsert| DB[(Supabase)]
+  AI -->|score per job × role| DB
+  N -->|check notifications_log| DB
+  N -->|digest, Apply buttons| TG[Telegram]
+  W[Next.js dashboard] <-->|server actions| DB
+      </pre>
+      <p style="max-width:66ch"><b>Stage 1</b> is skill overlap between the posting and skills extracted from my uploaded resume PDF — free, runs on everything. <b>Stage 2</b> calls an LLM with reasoning only for postings above the keyword threshold. Scores persist per (job, role) pair so a re-run never re-scores. A role I type in is expanded once by the LLM into related titles and cached forever; that expansion scopes scraping, scoring and notifications.</p>
+    </div>
+  </div>
+
+  <div class="cs-body">
+    <h2>Screens</h2>
+    <div class="wide">
+      <div class="shots">
+        <div>
+          <div class="ui"><div class="ui-bar"><i></i><i></i><i></i><span>/dashboard · sorted by score · India + remote</span></div>
+            <div class="ui-body"><div class="ui-list">
+              <div><span>Backend Engineer (.NET) — Fintech, remote EU</span><em><span class="chip hi">0.91</span> Lever</em></div>
+              <div><span>Software Engineer II, Platform — SaaS, Singapore</span><em><span class="chip hi">0.86</span> Greenhouse</em></div>
+              <div><span>Python Engineer, Document AI — remote</span><em><span class="chip hi">0.82</span> Ashby</em></div>
+              <div><span>Full-stack Developer — Agency, India</span><em><span class="chip">0.61</span> RemoteOK</em></div>
+              <div><span>Senior Java Architect — Bank, UAE</span><em><span class="chip">0.34</span> MyCareersFuture</em></div>
+            </div></div></div>
+          <p class="ui-cap"><b>Dashboard.</b> Filter by location, source, status, score; bulk-move Interested → Applied.</p>
+        </div>
+        <div>
+          <div class="ui"><div class="ui-bar"><i></i><i></i><i></i><span>/insights · skill gaps</span></div>
+            <div class="ui-body"><div class="bars">
+              <div><span>PostgreSQL</span><i style="width:92%"></i><em>46</em></div>
+              <div><span>.NET / C#</span><i style="width:80%"></i><em>40</em></div>
+              <div><span>Azure</span><i style="width:62%"></i><em>31</em></div>
+              <div><span>Kubernetes</span><i class="gap" style="width:48%"></i><em>24 · gap</em></div>
+              <div><span>Kafka</span><i class="gap" style="width:30%"></i><em>15 · gap</em></div>
+              <div><span>Terraform</span><i class="gap" style="width:22%"></i><em>11 · gap</em></div>
+            </div></div></div>
+          <p class="ui-cap"><b>Insights.</b> Skill demand across matches; red = requested but missing from the resume.</p>
+        </div>
+        <div>
+          <div class="ui"><div class="ui-bar"><i></i><i></i><i></i><span>Telegram · Job Digest</span></div>
+            <div class="ui-body"><div class="tg"><b>Run 06:00 UTC — 3 high, 5 worth reviewing</b><br>🟢 0.91 Backend Engineer (.NET) — Fintech<br>🟢 0.86 Software Engineer II — SaaS<br>🟢 0.82 Python Engineer, Document AI<div class="btns"><span>Apply ↗</span><span>Apply ↗</span><span>Apply ↗</span><span>Worth reviewing (5)</span><span>Dashboard</span></div></div></div></div>
+          <p class="ui-cap"><b>Telegram digest.</b> One message per run; buttons deep-link to the posting.</p>
+        </div>
+      </div>
+      <p style="color:var(--ink-2);font-size:14px">Prototype screens with sample postings. The live app is behind login; scores are from real runs.</p>
+    </div>
+  </div>
+
+
+  <div class="cs-body">
+    <h2>Decisions that mattered</h2>
+    <div>
+      <ul class="decisions">
+        <li><b>Two-stage scoring.</b> Keyword gate first, LLM second. Cuts LLM calls to a fraction of listings with no visible loss in the digest.</li>
+        <li><b>At-most-once notifications.</b> Every send is recorded in <code>notifications_log</code> before delivery is attempted; a retried workflow finds the row and skips. Duplicate pings were the #1 reason I muted the first version.</li>
+        <li><b>Digest mode by default.</b> One message per run with score bands and inline Apply buttons beats twenty separate pings. Individual mode still exists behind an env flag.</li>
+        <li><b>No ORM, no state library.</b> Supabase client + server actions. Prisma, Drizzle, Zustand and React Query were considered and rejected; the reasons are written down in the repo's <code>CLAUDE.md</code>.</li>
+        <li><b>Validate sources as a separate workflow.</b> Board tokens rot. A manual "Validate sources" run tells me which ones broke before the scrape does.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="cs-body">
+    <h2>Results</h2>
+    <div class="wide">
+      <div class="results">
+        <div><b>2×/day</b><span>fully unattended runs</span></div>
+        <div><b>6</b><span>sources normalized into one schema</span></div>
+        <div><b>0</b><span>duplicate alerts since the log was added</span></div>
+        <div><b>7</b><span>GitHub Actions workflows: scrape, rescore, migrate, validate, verify, maintenance, CI</span></div>
+      </div>
+    </div>
+  </div>
+
+  <p class="ask">Want the longer version, or the parts I left out? <a href="mailto:sahidhullah@gmail.com">sahidhullah@gmail.com</a></p>
+  <div class="next"><a href="profile-router.html">← Profile Router</a><a href="pdf-diff.html">Next: PDF Diff Tool →<small>same problem as work, opposite approach</small></a></div>
+</main>
+<footer class="wrap">© 2026 Sahidhullah H · Plain HTML and CSS; Mermaid draws the diagrams.</footer>
+</body>
+</html>
