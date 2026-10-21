@@ -34,6 +34,7 @@
       <a href="#experience" data-s="experience">Experience</a>
       <a href="#projects" data-s="projects">Projects</a>
       <a href="#automation" data-s="automation">Automation</a>
+      <a href="#research" data-s="research">Research</a>
       <a href="#contact" data-s="contact">Contact</a>
     </nav>
     <div class="social">
@@ -47,7 +48,7 @@
 
     <section id="about" class="about">
       <h2 class="sticky">About</h2>
-      <p>Two years at Propel on a B2B tax-review platform and a commercial healthcare ecosystem — mostly .NET and PostgreSQL, Python wherever documents are involved. On the side I automate whatever I catch myself doing twice.</p>
+      <p>Two years at Propel on a B2B tax-review platform and a commercial healthcare ecosystem — mostly .NET and PostgreSQL, Python wherever documents are involved. On the side I automate whatever I catch myself doing twice — and since September that has grown into a home server running unattended workers, a human-approved outreach pipeline, and a hosted inventory app for my father.</p>
       <p>I like measurable work: a slow endpoint, a messy schema, a manual step somebody does every week. The comparison below is the format our product shows tax reviewers — seemed fair to run it on myself.</p>
       <div class="facts">
       <span><b>Chennai, India</b> (IST)</span>
@@ -122,6 +123,64 @@
       <h2 class="sticky">Projects</h2>
       <div class="list">
 <div class="item">
+  <div class="when">Oct 2026 · private</div>
+  <div>
+    <h3>Prospect Agent</h3>
+    <p>Daily pipeline that finds companies worth pitching, researches the real reason to contact them, and drafts the email. <b>Every claim carries its evidence, and nothing sends itself</b> — a human approves each message from a review UI. Runs unattended on a home server on a 05:00 timer, with Run now and Retry from the UI.</p>
+    <ul class="tags"><li>Python</li><li>Scheduled workers</li><li>Review UI</li><li>RSS + search APIs</li></ul>
+    <div class="links"><a href="#research">Research notes</a></div>
+  </div>
+</div>
+<div class="item">
+  <div class="when">Oct 2026 · private</div>
+  <div>
+    <h3>impl-kit — unattended implementation runs</h3>
+    <p>One Claude Code session in tmux finishes a written plan on its own: plan lint, builder and judge subagents, max two retries, one model escalation, a marked decision log. It <b>asks my phone only for irreversible actions or real ambiguity</b>, and waiting costs zero tokens. Self-test: 18 checks; phone round trip verified at 137 s.</p>
+    <ul class="tags"><li>Bash</li><li>tmux</li><li>ntfy</li><li>Claude Code</li></ul>
+    <div class="links"><a href="#research">Why it exists</a></div>
+  </div>
+</div>
+<div class="item">
+  <div class="when">Oct 2026 · private</div>
+  <div>
+    <h3>taskfs — tasks as synced files</h3>
+    <p>Replaced a Notion database with one folder per task, synced by Syncthing across laptop, server and phone. <b>No master copy:</b> conflicting edits are merged per field by timestamp, and the always-on peer assigns task codes. 104 tasks migrated and verified field by field; active tasks with due dates push to a calendar.</p>
+    <ul class="tags"><li>Python</li><li>Syncthing</li><li>systemd timers</li><li>Google Calendar API</li></ul>
+  </div>
+</div>
+<div class="item">
+  <div class="when">Oct 2026 · private</div>
+  <div>
+    <h3>Music-DL Discover</h3>
+    <p>Search and one-tap album or playlist download that feeds a self-hosted music server. Tracks that find no source fall back to YouTube. Behind login with session cookies, on a tailnet-only address. First batch: <b>771 tracks done, failures triaged by cause</b> (mostly regional film music missing from the source network).</p>
+    <ul class="tags"><li>Python</li><li>Web UI</li><li>Soulseek</li><li>Navidrome</li></ul>
+  </div>
+</div>
+<div class="item">
+  <div class="when">Oct 2026 · private</div>
+  <div>
+    <h3>MedStock</h3>
+    <p>Medicine inventory for a real user, my father: batches, stock levels and an automatic audit log of every change. Chose a Cloudflare Worker + D1 over a static app so he never sees a permission prompt and I can restore or redeploy invisibly. <b>Nightly backup to a private repo, gated on integrity and row-count checks.</b> Live and handed over.</p>
+    <ul class="tags"><li>Cloudflare Workers</li><li>D1 (SQLite)</li><li>GitHub Actions</li></ul>
+  </div>
+</div>
+<div class="item">
+  <div class="when">Oct 2026 · private</div>
+  <div>
+    <h3>Home server (DietPi) and Pi Fleet</h3>
+    <p>An old laptop turned always-on worker: firewall rules, Tailscale access, Cockpit pages, Syncthing, a living runbook, and outage tooling that records network drops. <b>Pi Fleet</b> runs investigator, reviewer and builder agents on free models through a local gateway, so low-stakes recon and review stop spending paid-model budget.</p>
+    <ul class="tags"><li>Linux</li><li>nftables</li><li>systemd</li><li>Tailscale</li><li>LLM gateway</li></ul>
+  </div>
+</div>
+<div class="item">
+  <div class="when">Oct 2026 · in design</div>
+  <div>
+    <h3>Widget Base</h3>
+    <p>Android app for importable home-screen widgets, KWGT-style: a small stable base, with widgets, data sources and themes arriving as packs. Research, decisions and a clickable mockup are done; the render engine (JSON, native canvas to bitmap) is the open call before code.</p>
+    <ul class="tags"><li>Kotlin</li><li>AppWidgets</li><li>Canvas</li></ul>
+  </div>
+</div>
+<div class="item">
   <div class="when">Case study</div>
   <div>
     <h3><a href="projects/profile-router.html">Profile Router <span class="arr">↗</span></a></h3>
@@ -186,6 +245,10 @@
       <tr><td>Checking six job boards</td><td>GitHub Actions scrapes Greenhouse, Lever, Ashby, Wellfound, RemoteOK and MyCareersFuture, scores against my resume, posts a Telegram digest. Separate workflows validate sources, re-score after a resume change, and verify production.</td><td>06:00 and 14:00 UTC</td></tr>
       <tr><td>Weekly timesheet entry</td><td>A script rebuilds the HR timesheet import file from an Azure DevOps work-item CSV export, packaged as a Claude Code skill so anyone on the team can run it.</td><td>Weekly, ~2 min instead of ~30</td></tr>
       <tr><td>Picking a model per prompt</td><td>Profile Router classifies each prompt and picks model, thinking level and toolset. Downgrades apply silently; upgrades confirm once.</td><td>Every prompt</td></tr>
+      <tr><td>Finding and drafting client outreach</td><td>Prospect Agent scouts, researches, judges and drafts; I approve each send in a review UI. Runs on a home server and logs every run.</td><td>Daily, 05:00 IST</td></tr>
+      <tr><td>Finishing a written build plan</td><td>impl-kit runs builders and judges in tmux, retries twice, escalates once, and pings my phone only when it needs a decision.</td><td>Per plan</td></tr>
+      <tr><td>Keeping tasks in sync across devices</td><td>Syncthing plus a merge timer on the server resolves conflicts per field and pushes due dates to a calendar.</td><td>Every 5 min</td></tr>
+      <tr><td>Backing up the inventory database</td><td>A GitHub Action dumps the D1 database, rebuilds it as a check, and fails on row-count drops.</td><td>Nightly</td></tr>
       <tr><td>Turning notes into study material</td><td>A Claude Code skill emits a typed JSON card feed; the Learning Cards app renders and exports it.</td><td>On demand</td></tr>
       <tr><td>Laptop battery / power modes</td><td>Global hotkeys flip charge and power modes through the driver IOCTL — no vendor app.</td><td>Ctrl+Alt+6/7/8</td></tr>
       <tr><td>Release packaging</td><td><code>release.ps1</code> zips, versions and tags; <code>install.ps1</code> drops a Startup shortcut and nothing else.</td><td>Per release</td></tr>
@@ -194,12 +257,62 @@
     <p class="auto-note">Rule I use: if a task has been done twice and has a clear input and output, it gets a script. If the script runs more than once a week, it gets a scheduler and a log.</p>
     </section>
 
+    <section id="research">
+      <h2 class="sticky">Research &amp; Ideas</h2>
+      <p class="auto-note" style="margin-top:0;margin-bottom:24px">Findings from builds and evaluations, kept short. Ideas are marked as ideas: not built, not promised.</p>
+      <div class="list">
+<div class="item">
+  <div class="when">Finding</div>
+  <div>
+    <h3>46% of builder attempts were retries</h3>
+    <p>Post-mortem of a 20-task automated build: nearly half the builder attempts were retries. Causes were plan gaps — older tests missing from the file fence, the failing case hidden in retry feedback, and me acting as the adaptive layer. That became impl-kit: lint the plan first, bound retries, and make the log say what was decided.</p>
+  </div>
+</div>
+<div class="item">
+  <div class="when">Finding</div>
+  <div>
+    <h3>Prebuilt tools for client outreach: wrong fit</h3>
+    <p>Before building Prospect Agent I surveyed prebuilt outreach and lead tools. None paired per-claim evidence with human approval on every send, so I built it. One find, a Claude Code job-search pipeline, was a poor fit for outreach but worth a separate evaluation for job hunting against my own scraper.</p>
+  </div>
+</div>
+<div class="item">
+  <div class="when">Finding</div>
+  <div>
+    <h3>Small local models: cheap, with sharp edges</h3>
+    <p>On a laptop with an integrated GPU, a 1.7B model runs ~35 tok/s and an 8B mixture-of-experts ~37 tok/s: fine for extraction and classification, not for reasoning. Gotchas recorded: prompt-cache reuse on Vulkan produces garbage on long prompts, and reasoning models return empty output under a small token cap. Structured jobs now move to an always-on box.</p>
+  </div>
+</div>
+<div class="item">
+  <div class="when">Idea</div>
+  <div>
+    <h3>Local routing classifier for impl-kit</h3>
+    <p>Route each plan task to a model tier (small, mid, large) with a tiny on-device classifier instead of fixed rules. Benchmarked a few candidate classifiers on the server; parked until the fixed rules show measurable waste.</p>
+  </div>
+</div>
+<div class="item">
+  <div class="when">Idea</div>
+  <div>
+    <h3>On-device stream source ranker</h3>
+    <p>Rank streaming providers by live speed and health on the phone's current network, with no server. Small, bounded, and the data is already on the device.</p>
+  </div>
+</div>
+<div class="item">
+  <div class="when">Idea</div>
+  <div>
+    <h3>Listening stats dashboard</h3>
+    <p>A dashboard over the music server's play history to see what actually gets listened to, which would tell me which downloads are worth the disk.</p>
+  </div>
+</div>
+      </div>
+    </section>
+
     <section id="skills">
       <h2 class="sticky">Skills</h2>
       <dl class="skills">
       <dt>Daily</dt><dd>C#, .NET 8, ASP.NET Core Web API, EF Core, CQRS / MediatR, PostgreSQL, Azure (Blob, Entra ID)</dd>
       <dt>Regularly</dt><dd>Python, PyMuPDF, TypeScript, Node, Next.js, Angular, React, Supabase, GitHub Actions, Docker, PowerShell</dd>
-      <dt>AI tooling</dt><dd>LLM API integration (OpenRouter, OpenAI-compatible, Gemini), prompt routing and token-cost optimization, structured JSON extraction</dd>
+      <dt>AI tooling</dt><dd>LLM API integration (OpenRouter, OpenAI-compatible, Gemini), prompt routing and token-cost optimization, structured JSON extraction, agent orchestration with bounded retries and human-in-the-loop approval</dd>
+      <dt>Ops</dt><dd>Linux (DietPi/Debian), systemd timers, nftables, Tailscale, Syncthing, Cloudflare Workers + D1, tmux</dd>
       <dt>Also</dt><dd>SQL Server, SQLite, Redux, Tailwind, Vitest, Postman</dd>
     </dl>
     </section>
