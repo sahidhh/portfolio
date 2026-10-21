@@ -60,7 +60,7 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 0; pointer-events
 /* about */
 .about p { max-width: 62ch; margin-bottom: 16px; }
 .about p b { color: var(--hd); font-weight: 500; }
-.facts { display: flex; flex-wrap: wrap; gap: 8px 24px; font-size: 14px; margin: 8px 0 32px; }
+.facts { display: flex; flex-wrap: wrap; gap: 8px 24px; font-size: 14px; margin: 8px 0 0; }
 .facts b { color: var(--hd); font-weight: 500; }
 
 /* experience + project rows: the Chiang row */
