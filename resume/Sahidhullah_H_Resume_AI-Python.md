@@ -16,7 +16,7 @@ Backend engineer (2 yrs) working across Python and .NET, focused on LLM-integrat
 ## EXPERIENCE
 
 **Propel Technologies** — L2 Software Engineer (promoted from Backend Developer, 2025)
-Chennai, India | Aug 2024 – Present
+Chennai, India | Aug 2024 – Sep 2026
 
 - Built the document-comparison pipeline for a B2B tax-review platform: a .NET REST API uploads tax-form PDFs to Azure Blob Storage and tracks processing status, then triggers a Python worker that extracts, compares, and stores form differences with an LLM-generated summary of each change — processing 500+ documents per review cycle.
 - Developed coordinate-based PDF field extraction in Python with PyMuPDF, driven by a JSON locator schema, cutting new IRS form onboarding from ~3 days of code changes to under a day of configuration.

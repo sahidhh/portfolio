@@ -18,7 +18,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Person","name":"Sahidhullah H","jobTitle":"Backend Engineer","worksFor":{"@type":"Organization","name":"Propel Technologies"},"address":{"@type":"PostalAddress","addressLocality":"Chennai","addressCountry":"IN"},"email":"mailto:sahidhullah@gmail.com","url":"https://sahidhh.github.io/portfolio/","sameAs":["https://github.com/sahidhh","https://www.linkedin.com/in/sahidh-h/"],"knowsAbout":["C#",".NET","PostgreSQL","Python","TypeScript","Azure","CQRS"]}
+{"@context":"https://schema.org","@type":"Person","name":"Sahidhullah H","jobTitle":"Backend Engineer","address":{"@type":"PostalAddress","addressLocality":"Chennai","addressCountry":"IN"},"email":"mailto:sahidhullah@gmail.com","url":"https://sahidhh.github.io/portfolio/","sameAs":["https://github.com/sahidhh","https://www.linkedin.com/in/sahidh-h/"],"knowsAbout":["C#",".NET","PostgreSQL","Python","TypeScript","Azure","CQRS"]}
 </script>
 </head>
 <body>
@@ -28,12 +28,13 @@
   <header class="side">
     <h1><a href="index.html">Sahidhullah H</a></h1>
     <p class="role">Backend Engineer · .NET, PostgreSQL, Python</p>
-    <p class="tag">I make slow endpoints fast, messy schemas clean, and manual document work automatic. Two years in production at Propel Technologies; available for remote roles and contract work.</p>
+    <p class="tag">I make slow endpoints fast, messy schemas clean, and manual document work automatic. Two years in production at Propel Technologies (2024–2026); available now for remote roles and contract work.</p>
     <nav aria-label="Sections">
       <a href="#about" data-s="about">About</a>
       <a href="#experience" data-s="experience">Experience</a>
       <a href="#projects" data-s="projects">Projects</a>
       <a href="#automation" data-s="automation">Automation</a>
+      <a href="#research" data-s="research">Research</a>
       <a href="#contact" data-s="contact">Contact</a>
     </nav>
     <div class="social">
@@ -47,12 +48,12 @@
 
     <section id="about" class="about">
       <h2 class="sticky">About</h2>
-      <p>I'm a backend engineer at Propel Technologies in Chennai, promoted in 2025. For two years I've worked on a B2B tax-review platform and a healthcare system: .NET 8, EF Core, PostgreSQL and Azure, with Python wherever documents are involved.</p>
+      <p>I'm a backend engineer in Chennai. I spent two years at Propel Technologies (Aug 2024 – Sep 2026), promoted in 2025, working on a B2B tax-review platform and a healthcare system: .NET 8, EF Core, PostgreSQL and Azure, with Python wherever documents are involved.</p>
       <p>Recent results: led the move to CQRS / Clean Architecture (new review tools now take ~4 days instead of ~2 weeks), cut reporting endpoints from ~8 s to under 2 s, and built the backend of a PDF form-comparison pipeline that processes 500+ documents per cycle.</p>
       <p>Outside work I build small tools that run on their own: a job-discovery pipeline, a local-first CRM, and a hosted medicine-inventory app built for a family member, handed over and live since October 2026 with nightly verified backups.</p>
       <div class="facts">
       <span><b>Chennai, India</b> (IST)</span>
-      <span><b>Open to remote</b>, US/EU overlap</span>
+      <span><b>Available now</b>, open to remote, US/EU overlap</span>
       <span><b>Full-time or contract</b></span>
       <span><b>C# · Python · TypeScript</b></span>
     </div>
@@ -62,7 +63,7 @@
       <h2 class="sticky">Experience</h2>
       <div class="list">
 <div class="item">
-  <div class="when">2024 — Present</div>
+  <div class="when">Aug 2024 — Sep 2026</div>
   <div>
     <h3>L2 Software Engineer <span>· Propel Technologies</span></h3>
     <div class="sub">Promoted from Backend Developer, 2025 · Chennai</div>
@@ -190,6 +191,57 @@
     </table>
     </div>
     <p class="auto-note">Rule I use: if a task has been done twice and has a clear input and output, it gets a script. If the script runs more than once a week, it gets a scheduler and a log.</p>
+    </section>
+
+    <section id="research">
+      <h2 class="sticky">Research &amp; Ideas</h2>
+      <p class="auto-note" style="margin-top:0;margin-bottom:24px">Evaluations I ran before building or adopting something, and ideas queued next. Ideas are not built.</p>
+      <div class="list">
+<div class="item">
+  <div class="when">Evaluation</div>
+  <div>
+    <h3>Should an open-source job-search agent replace my job scraper?</h3>
+    <p>Cloned a 76k-star Claude Code job-search pipeline, ran it on a fake CV, and compared it with my scraper. A scan of 94 sources found 2,758 new jobs in 73 s at zero tokens, but only ~30 were India/remote backend roles. One deep evaluation took 130 s and about $0.64 list-equivalent. <b>Verdict: keep the scraper, adopt parts</b> — on-demand deep evaluation for the top few matches, a liveness check, more ATS providers and repost detection. Estimated 10–14 h, against 25–35 h for a full replacement that would lose unattended Telegram delivery.</p>
+    <ul class="tags"><li>Node</li><li>claude -p</li><li>Cost model</li></ul>
+  </div>
+</div>
+<div class="item">
+  <div class="when">Evaluation</div>
+  <div>
+    <h3>Is durable execution worth adding to my agent fleet?</h3>
+    <p>Reviewed a crash-recovery library for AI agents against my fleet of unattended coding-agent jobs. Every job is a single-shot run whose output a script checks, so re-running from scratch is cheaper than checkpointing, and the library's API was still changing between releases. <b>Verdict: keep the plain runner</b>; fix the real failures instead (retries, missed timers after a reboot). Written down with the conditions that would change the answer: multi-hour jobs or a stable 2.0.</p>
+    <ul class="tags"><li>TypeScript</li><li>systemd</li><li>Reliability</li></ul>
+  </div>
+</div>
+<div class="item">
+  <div class="when">Proposal</div>
+  <div>
+    <h3>autodroid — a phone-automation builder that shows the real command</h3>
+    <p>Written proposal for a sideloaded Android app that builds "when X, do Y" automations as nested block flows. Each block displays the shell command it runs, so building flows also teaches adb. Scope, non-goals and phases are written; nothing is built.</p>
+  </div>
+</div>
+<div class="item">
+  <div class="when">Idea</div>
+  <div>
+    <h3>EF Core query advisor</h3>
+    <p>An MCP server that flags N+1 and single-query-collection patterns in EF Core code and suggests split queries. It generalises the query fixes behind the reporting speed-up above.</p>
+  </div>
+</div>
+<div class="item">
+  <div class="when">Idea</div>
+  <div>
+    <h3>Deterministic-first document diff agent</h3>
+    <p>Extend the PDF diff approach: extraction and comparison stay deterministic, and the LLM only explains why a change matters.</p>
+  </div>
+</div>
+<div class="item">
+  <div class="when">Idea</div>
+  <div>
+    <h3>Roslyn-based C# code review agent</h3>
+    <p>Retrieve context from the C# symbol graph instead of text search, so a reviewer sees callers and implementations of the code it is reading.</p>
+  </div>
+</div>
+      </div>
     </section>
 
     <section id="skills">

@@ -16,7 +16,7 @@ Full stack developer (2 yrs) building B2B web platforms end to end — .NET / CQ
 ## EXPERIENCE
 
 **Propel Technologies** — L2 Software Engineer (promoted from Backend Developer, 2025)
-Chennai, India | Aug 2024 – Present
+Chennai, India | Aug 2024 – Sep 2026
 
 *B2B tax-review platform (.NET, PostgreSQL, Angular, Azure)*
 
