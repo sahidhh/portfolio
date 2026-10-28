@@ -31,7 +31,7 @@
       <p class="sub">At work I built a config-driven form-comparison pipeline for a client's tax-review platform. On my own time I built a second tool from scratch to test the opposite idea: no per-form config at all, just words, their boxes and a diff.</p>
     </div>
     <div class="meta">
-      <div><b>Role</b> <span>Solo; the work pipeline was a team build I led on the backend</span></div>
+      <div><b>Role</b> <span>Solo; I worked on the backend of the team-built work pipeline</span></div>
       <div><b>Stack</b> <span>Python, FastAPI, PyMuPDF, Tesseract, difflib</span></div>
       <div><b>Work version</b> <span>.NET API + Azure Blob + Python worker + PostgreSQL, JSON locator schema per form</span></div>
       <div><a href="https://github.com/sahidhh/pdf-diff-tool" target="_blank" rel="noopener">Source</a></div>
@@ -108,7 +108,7 @@ flowchart LR
     <div>
       <ul class="decisions">
         <li><b>Diff text, never pixels.</b> The rendered page is only a backdrop. Boxes ride along with words as percentages of the page so they scale with the image.</li>
-        <li><b>A <code>clean()</code> step before diffing.</b> Drop tokens with no alphanumeric character and runs of 3+ identical single-character tokens. On a 3-page Schedule M-3 that removes ~27% of tokens, all of it noise. A lone <code>a</code>/<code>b</code> line label survives because only runs are dropped.</li>
+        <li><b>A <code>clean()</code> step before diffing.</b> Drop tokens with no alphanumeric character and runs of 3+ identical single-character tokens. A lone <code>a</code>/<code>b</code> line label survives because only runs are dropped.</li>
         <li><b><code>autojunk=False</code>.</b> difflib's default treats common words as junk and the diff degrades on repetitive form text. Found the hard way.</li>
         <li><b>OCR only when needed, and say so.</b> A page with no text layer is rasterized at 300 dpi and read with Tesseract; words under confidence 40 are discarded. Each column header states how its text was obtained and OCR pages get a badge, so reviewers know when to trust it less.</li>
         <li><b>Engine has no web dependency.</b> <code>diff_engine.compare(bytes, bytes)</code> is importable on its own and ships a one-line self-check. Same shape as the worker at work, so the two are easy to compare.</li>
@@ -129,7 +129,6 @@ flowchart LR
       <p>Where it landed: the schema-free diff is the right first look ("did anything change on this page?"), and the config-driven pipeline is the right answer for reviewers who need to know <i>which field</i> changed. I'd use the first to decide whether the second is worth running.</p>
       <div class="results">
         <div><b>500+</b><span>documents per cycle on the work pipeline</span></div>
-        <div><b>~27%</b><span>tokens removed as noise before diffing</span></div>
         <div><b>0</b><span>config files needed for a new form</span></div>
       </div>
     </div>

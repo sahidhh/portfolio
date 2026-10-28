@@ -129,7 +129,7 @@ architecture       0    1  -
     <h2>Decisions that mattered</h2>
     <div>
       <ul class="decisions">
-        <li><b>Keyword scoring instead of an LLM classifier.</b> Routing that costs tokens defeats the purpose. Word-boundary matching plus per-keyword weights got within acceptable accuracy for free.</li>
+        <li><b>Keyword scoring instead of an LLM classifier.</b> Routing that costs tokens defeats the purpose. Word-boundary matching plus per-keyword weights does the routing for free.</li>
         <li><b><code>premium</code> has a minimum score of 2.</b> Early versions sent every prompt containing "schema" or "secret" to the expensive tier. A bare noun now needs a second signal; single destructive verbs (<code>force-push</code>, <code>reset --hard</code>) are weight 2 on their own.</li>
         <li><b>Downgrades apply silently, upgrades confirm once.</b> Nobody wants a dialog to use the cheap model. Going up costs money, so it asks, once per (from→to) pair, persisted across sessions.</li>
         <li><b>Fallback chains, and <code>premium</code> has none.</b> Cheap tiers chain through providers until one has credentials. The safety tier deliberately cannot fall down to a cheaper model.</li>
