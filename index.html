@@ -196,7 +196,7 @@
 
     <section id="research">
       <h2 class="sticky">Research</h2>
-      <p class="auto-note" style="margin-top:0;margin-bottom:24px">Evaluations I ran before building or adopting something.</p>
+      <p class="auto-note" style="margin-top:0;margin-bottom:24px">An evaluation I ran before building or adopting something.</p>
       <div class="list">
 <div class="item">
   <div class="when">Evaluation</div>
@@ -204,14 +204,6 @@
     <h3>Should an open-source job-search agent replace my job scraper?</h3>
     <p>Cloned a 76k-star Claude Code job-search pipeline, ran it on a fake CV, and compared it with my scraper. A scan of 94 sources found 2,758 new jobs in 73 s at zero tokens, but only ~30 were India/remote backend roles. One deep evaluation took 130 s and about $0.64 list-equivalent. <b>Verdict: keep the scraper, adopt parts.</b> Add on-demand deep evaluation for the top few matches, a liveness check, more ATS providers and repost detection. Estimated 10 to 14 h, against 25 to 35 h for a full replacement that would lose unattended Telegram delivery.</p>
     <ul class="tags"><li>Node</li><li>claude -p</li><li>Cost model</li></ul>
-  </div>
-</div>
-<div class="item">
-  <div class="when">Evaluation</div>
-  <div>
-    <h3>Is durable execution worth adding to my agent fleet?</h3>
-    <p>Reviewed a crash-recovery library for AI agents against my fleet of unattended coding-agent jobs. Every job is a single-shot run whose output a script checks, so re-running from scratch is cheaper than checkpointing, and the library's API was still changing between releases. <b>Verdict: keep the plain runner</b>; fix the real failures instead (retries, missed timers after a reboot). Written down with the conditions that would change the answer: multi-hour jobs or a stable 2.0.</p>
-    <ul class="tags"><li>TypeScript</li><li>systemd</li><li>Reliability</li></ul>
   </div>
 </div>
       </div>
