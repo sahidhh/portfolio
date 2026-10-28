@@ -1,81 +1,55 @@
 # Sahidhullah H
 
-Full Stack Developer — .NET + Angular / React
+L2 Software Engineer | Full Stack | React, Angular, TypeScript, .NET
 
-Chennai, India (IST) | Open to Remote — Worldwide | Available for US/EU hours overlap | Full-time or Contract
-sahidhullah@gmail.com | linkedin.com/in/sahidh-h | github.com/sahidhh
+Chennai, Tamil Nadu, India | +91 9789442466 | sahidhullah@gmail.com
+sahidhh.github.io/portfolio | linkedin.com/in/sahidh-h | github.com/sahidhh
 
 ---
 
 ## SUMMARY
 
-Full stack developer (2 yrs) building B2B web platforms end to end — .NET / CQRS backends with PostgreSQL, and Angular and React frontends. At Propel, built both the backend modules and the Angular interface for a tax-review platform, and cut reporting endpoint response times from ~8s to under 2s.
+Full stack engineer with 2+ years building React and Angular front ends on top of .NET 8, ASP.NET Core and PostgreSQL back ends, on B2B and healthcare platforms. Available to join within 15 days.
+
+---
+
+## TECHNICAL SKILLS
+
+**Frontend:** React, Angular, TypeScript, JavaScript, Redux, React Native, HTML, CSS
+**Backend:** .NET 8, C#, ASP.NET Core, Entity Framework Core, MediatR, CQRS, Clean Architecture, REST APIs, microservices, Node.js
+**Databases:** PostgreSQL, SQL Server, MongoDB, SQLite
+**Cloud and tools:** Azure (Blob Storage, Entra ID), AWS, Docker, Jenkins, Git, GitHub Actions, unit, integration and load testing
+**Other languages:** Python, SQL, Java, Kotlin
 
 ---
 
 ## EXPERIENCE
 
-**Propel Technologies** — L2 Software Engineer (promoted from Backend Developer, 2025)
-Chennai, India | Aug 2024 – Sep 2026
+**Propel Technology Group Inc**, Chennai | Aug 2024 to Sep 2026
 
-*B2B tax-review platform (.NET, PostgreSQL, Angular, Azure)*
+L2 Software Engineer (Aug 2026 to Sep 2026), promoted from Back End Developer (Aug 2024 to Aug 2026). Worked on a B2B tax-review platform and a healthcare and e-commerce platform.
 
-**Backend**
-- Migrated the backend from a layered design to CQRS-based Clean Architecture using MediatR, EF Core, and the Unit of Work pattern, cutting the time to add a new review tool from ~2 weeks to ~4 days.
-- Built 8+ backend modules covering Azure Entra ID authentication, IRS-form version comparison, year-over-year comparison, audit reporting, Excel export, and activity tracking.
-- Redesigned and normalized the PostgreSQL schema for clients, engagements, and 5 review tools, removing 6 redundant tables and eliminating duplicate client records.
-- Optimized EF Core data access with split queries and shared query helpers, removing N+1 patterns and reducing reporting endpoint response times from ~8s to under 2s.
+- Built the Angular side-by-side comparison screen with colour-coded changes and 10+ shared components.
+- Built the backend of the PDF form-comparison pipeline behind it. A .NET API stores files in Azure Blob and tracks status, and a Python worker extracts text, compares versions and writes an LLM summary of the changes. It handles 500+ documents per cycle.
+- On the healthcare platform, designed 20+ REST APIs (orders, appointments, lab tests, payments, prescriptions) serving a mobile app, three web portals and a pharmacy back office. Query tuning and caching cut response times by about 80%.
+- Moved a production backend from a layered design to CQRS and Clean Architecture (MediatR, EF Core, Unit of Work). Adding a new review tool dropped from about 2 weeks to 4 days.
+- Owned 8+ backend modules, including Entra ID authentication, IRS form version comparison, audit reporting and Excel export.
+- Wrote unit and integration tests, and Python load tests run against staging and UAT servers. Deployed builds by hand and with simple Docker scripts, using Jenkins, AWS and Azure.
 
-**Frontend**
-- Built the Angular interface for the comparison tools, including a side-by-side view that colour-codes changes, comparison side panels, and a dashboard stats banner.
-- Developed 10+ reusable Angular components — collapsible lists, dropdowns, modal overlays, and shared table layouts — consumed across multiple review tools.
-- Integrated the Angular frontend with the .NET REST APIs, handling auth flows, loading and error states, and paginated data.
+**Frontend Developer Intern**, Mallow Technologies, Coimbatore | Jun 2023 to Dec 2023
 
-*Commercial healthcare ecosystem (React Native/Expo, React + Vite/TS, .NET, PostgreSQL, Python)*
-
-- Worked across an end-to-end healthcare platform: patient app for Android and iOS, web portals for healthcare data admins, receptionists and doctors, and a pharmacy back office — one .NET backend and one PostgreSQL schema behind all of them.
-- Built doctor scheduling with a custom calendar and role-based access control separating admin, receptionist and doctor views; in-app e-commerce and lab-test booking.
-- Pharmacy portal: stock management, order processing, payments, prescription review, bill generation and delivery-partner setup; Python services for document processing and generation.
-- Designed 20+ REST APIs, reducing response times by ~80% through query optimization and caching.
-
-**Mallow Technologies** — Frontend Developer Intern
-Coimbatore, India | Jun 2023 – Dec 2023
-
-- Built responsive interfaces for a time-tracking web application using React.js and Redux, with reusable components for shared layout and state.
-- Integrated frontend components with backend REST APIs, aligned on API contracts with backend developers, and participated in code reviews.
+- Built responsive React and Redux screens for a time-tracking app and connected them to REST APIs.
 
 ---
 
 ## PROJECTS
 
-**Learning Card Generator** — TypeScript, JSON Schema, jsPDF
-github.com/sahidhh/learning-card-generator
+**Job Discovery Pipeline** | Next.js, TypeScript, Supabase, GitHub Actions
 
-- Mobile-first micro-learning web app that renders any topic as a scrollable feed of bite-sized learning cards.
-- Defined a typed JSON schema of 10+ card types (concept, analogy, code, quiz, comparison, recap) as the contract between the content source and the renderer.
-- Implemented ZIP export producing a vector-text PDF, JSON, and Markdown, replacing a screenshot-based PDF with selectable, searchable output ~10x smaller in file size.
-
-**Job Discovery Pipeline** — TypeScript, Next.js 15, Supabase, Tailwind, GitHub Actions
-github.com/sahidhh/job-scraper
-
-- Next.js dashboard with filterable job table, bulk status updates, resume upload with skill extraction, and skill-gap analytics on top of a Supabase Postgres schema.
-- GitHub Actions scrape six boards twice daily, score in two stages (keyword gate, then LLM), and send one Telegram digest per run with at-most-once delivery.
----
-
-## TECHNICAL SKILLS
-
-**Languages:** C#, TypeScript, JavaScript, Python, SQL
-
-**Frontend:** Angular, React.js, Redux, TypeScript, HTML5, CSS3, responsive UI
-
-**Backend:** .NET, .NET Core, ASP.NET Core Web API, CQRS, Clean Architecture, MediatR, Entity Framework Core, REST APIs, Node.js
-
-**Databases:** PostgreSQL, SQL Server, SQLite
-
-**Cloud & Tooling:** Microsoft Azure (Blob Storage, Entra ID), Docker, Git, GitHub Actions, Postman
+- Scrapes six job boards twice a day, scores postings in two stages (keywords first, LLM only for those that pass) and sends one Telegram digest. A notifications log gives at-most-once delivery. Live at job-scraper-liart.vercel.app.
 
 ---
 
 ## EDUCATION
 
-**B.Tech, Information Technology** — Karpagam College of Engineering, Coimbatore | 2020 – 2024
+**B.Tech, Information Technology**, Karpagam College of Engineering, Coimbatore | 2020 to 2024

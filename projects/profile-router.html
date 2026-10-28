@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Profile Router — Sahidhullah H</title>
+<title>Profile Router | Sahidhullah H</title>
 <meta name="description" content="Case study: routing every AI-agent prompt to the right model with zero LLM calls in the classifier.">
 <link rel="canonical" href="https://sahidhh.github.io/portfolio/projects/profile-router.html">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Profile Router — Sahidhullah H">
+<meta property="og:title" content="Profile Router | Sahidhullah H">
 <meta property="og:description" content="Case study: routing every AI-agent prompt to the right model with zero LLM calls in the classifier.">
 <meta property="og:url" content="https://sahidhh.github.io/portfolio/projects/profile-router.html">
 <meta name="twitter:card" content="summary">
@@ -28,10 +28,10 @@
   <div class="cs-head">
     <div>
       <h1>Profile Router: pick the model before the model gets to think</h1>
-      <p class="sub">An extension for OMP, the coding-agent CLI I use daily, that classifies every prompt with plain keyword scoring — no LLM in the loop — then sets model, thinking level, tools and rules for that one turn.</p>
+      <p class="sub">An extension for OMP, the coding-agent CLI I use daily, that classifies every prompt with plain keyword scoring (no LLM in the loop), then sets model, thinking level, tools and rules for that one turn.</p>
     </div>
     <div class="meta">
-      <div><b>Role</b> <span>Solo — design, code, tests, docs</span></div>
+      <div><b>Role</b> <span>Solo: design, code, tests, docs</span></div>
       <div><b>Stack</b> <span>TypeScript, Node built-ins only</span></div>
       <div><b>Size</b> <span>1 source file + 1 JSON table</span></div>
       <div><a href="https://github.com/sahidhh/profile-router" target="_blank" rel="noopener">Source</a><a href="https://github.com/sahidhh/profile-router/blob/main/DECISIONS.md" target="_blank" rel="noopener">Decision log</a></div>
@@ -42,15 +42,15 @@
     <h2>Why I built it</h2>
     <div>
       <p>In early July 2026 I spent a week designing something I called an Engineering Knowledge Compiler: a vendor-neutral library of engineering profiles, model tiers and escalation rules, plus a six-pass compiler to turn them into config for any AI coding agent. Fourteen spec files, about 300 KB of markdown. No code.</p>
-      <p>Then I asked, twice, whether it needed to exist next to what already shipped. Honest answer: the only piece I would use every day was the routing table — which model, which tools, for which kind of prompt. Everything else was me enjoying architecture.</p>
-      <p>So I salvaged the profile definitions and the keyword table out of the specs and wrote the smallest thing that would run: one TypeScript file, one JSON table, no dependencies. First commit July 10, working extension July 11. A week later I formally killed the vendor-neutral charter in the decision log — it had stopped earning its complexity.</p>
+      <p>Then I asked, twice, whether it needed to exist next to what already shipped. Honest answer: the only piece I would use every day was the routing table: which model, which tools, for which kind of prompt. Everything else was me enjoying architecture.</p>
+      <p>So I salvaged the profile definitions and the keyword table out of the specs and wrote the smallest thing that would run: one TypeScript file, one JSON table, no dependencies. First commit July 10, working extension July 11. A week later I formally killed the vendor-neutral charter in the decision log, because it had stopped earning its complexity.</p>
     </div>
   </div>
 
   <div class="cs-body">
     <h2>The problem</h2>
     <div>
-      <p>Route each prompt to a cheap model when it's safe and a strong one when it matters — <b>without spending an LLM call to decide</b>, which would eat the savings, and without ever routing a destructive action to the cheap tier.</p>
+      <p>Route each prompt to a cheap model when it's safe and a strong one when it matters. Do it <b>without spending an LLM call to decide</b>, which would eat the savings, and without ever routing a destructive action to the cheap tier.</p>
     </div>
   </div>
 
@@ -76,7 +76,7 @@ flowchart LR
         </div>
         <div class="demo-body" style="border-top:1px solid var(--rule)">
           <div>what is the schema of the users table</div>
-          <div><ins>lookup</ins> <span class="dim">· "schema" alone scores 1, premium needs 2 — stays cheap</span></div>
+          <div><ins>lookup</ins> <span class="dim">· "schema" alone scores 1, premium needs 2, so it stays cheap</span></div>
         </div>
         <div class="demo-body" style="border-top:1px solid var(--rule)">
           <div>rotate the api key and force-push the cleanup branch</div>
@@ -91,7 +91,7 @@ flowchart LR
     <div class="wide">
       <div class="shots">
         <div>
-          <div class="ui"><div class="ui-bar"><i></i><i></i><i></i><span>omp — status line</span></div>
+          <div class="ui"><div class="ui-bar"><i></i><i></i><i></i><span>omp: status line</span></div>
 <div class="term"><span class="p">›</span> where is the retry logic for blob uploads?
 <span class="p">⚙ lookup 🔒 · gemini-2.5-flash-lite · low</span>
 
@@ -109,7 +109,7 @@ flowchart LR
 profile          score  min  hit
 <span class="y">lookup</span>             3    1  what is, schema
 premium            1    2  schema
-architecture       0    1  —
+architecture       0    1  -
 
 <span class="p">→ lookup (margin 2). premium below minScore.</span></div></div>
           <p class="ui-cap"><b>/profile.</b> Score table for the last prompt; shows why the bare noun stayed cheap.</p>
@@ -129,11 +129,11 @@ architecture       0    1  —
     <h2>Decisions that mattered</h2>
     <div>
       <ul class="decisions">
-        <li><b>Keyword scoring, not an LLM classifier.</b> Routing that costs tokens defeats the purpose. Word-boundary matching plus per-keyword weights got within acceptable accuracy for free.</li>
+        <li><b>Keyword scoring instead of an LLM classifier.</b> Routing that costs tokens defeats the purpose. Word-boundary matching plus per-keyword weights got within acceptable accuracy for free.</li>
         <li><b><code>premium</code> has a minimum score of 2.</b> Early versions sent every prompt containing "schema" or "secret" to the expensive tier. A bare noun now needs a second signal; single destructive verbs (<code>force-push</code>, <code>reset --hard</code>) are weight 2 on their own.</li>
-        <li><b>Downgrades apply silently, upgrades confirm once.</b> Nobody wants a dialog to use the cheap model. Going up costs money, so it asks — once per (from→to) pair, persisted across sessions.</li>
+        <li><b>Downgrades apply silently, upgrades confirm once.</b> Nobody wants a dialog to use the cheap model. Going up costs money, so it asks, once per (from→to) pair, persisted across sessions.</li>
         <li><b>Fallback chains, and <code>premium</code> has none.</b> Cheap tiers chain through providers until one has credentials. The safety tier deliberately cannot fall down to a cheaper model.</li>
-        <li><b>Tests that guard the table, not just the code.</b> A reachability test proves every profile's trigger prompt reaches that profile; a regression test fails the build if adding a keyword lets another profile outrank it.</li>
+        <li><b>Tests that guard the table as well as the code.</b> A reachability test proves every profile's trigger prompt reaches that profile; a regression test fails the build if adding a keyword lets another profile outrank it.</li>
       </ul>
     </div>
   </div>

@@ -1,80 +1,57 @@
 # Sahidhullah H
 
-Backend & AI Systems Engineer
+L2 Software Engineer | Python, .NET | Document pipelines and AI tooling
 
-Chennai, India (IST) | Open to Remote — Worldwide | Available for US/EU hours overlap | Full-time or Contract
-sahidhullah@gmail.com | linkedin.com/in/sahidh-h | github.com/sahidhh
+Chennai, Tamil Nadu, India | +91 9789442466 | sahidhullah@gmail.com
+sahidhh.github.io/portfolio | linkedin.com/in/sahidh-h | github.com/sahidhh
 
 ---
 
 ## SUMMARY
 
-Backend engineer (2 yrs) working across Python and .NET, focused on LLM-integrated document pipelines and cost-efficient AI tooling. Built a production PDF extraction and comparison system processing 500+ documents per cycle, and an open-source prompt-routing layer that cut inference spend by ~60%.
-
----
-
-## EXPERIENCE
-
-**Propel Technologies** — L2 Software Engineer (promoted from Backend Developer, 2025)
-Chennai, India | Aug 2024 – Sep 2026
-
-- Built the document-comparison pipeline for a B2B tax-review platform: a .NET REST API uploads tax-form PDFs to Azure Blob Storage and tracks processing status, then triggers a Python worker that extracts, compares, and stores form differences with an LLM-generated summary of each change — processing 500+ documents per review cycle.
-- Developed coordinate-based PDF field extraction in Python with PyMuPDF, driven by a JSON locator schema, cutting new IRS form onboarding from ~3 days of code changes to under a day of configuration.
-- Added missing-page detection and page-number identification to the Python worker, and reworked it to read and write directly from PostgreSQL instead of local JSON files, removing a manual Excel export step from every review cycle.
-- Migrated the .NET backend from a layered design to CQRS-based Clean Architecture (MediatR, EF Core, Unit of Work), cutting the time to add a new review tool from ~2 weeks to ~4 days.
-- Redesigned and normalized the PostgreSQL schema for clients, engagements, and 5 review tools, removing 6 redundant tables and eliminating duplicate client records.
-- Optimized EF Core data access with split queries and shared query helpers, removing N+1 patterns and reducing reporting endpoint response times from ~8s to under 2s.
-
-**Mallow Technologies** — Frontend Developer Intern
-Coimbatore, India | Jun 2023 – Dec 2023
-
-- Built responsive interfaces for a time-tracking web application using React.js and Redux, with reusable components for shared layout and state.
-- Integrated frontend components with backend REST APIs and participated in code reviews.
-
----
-
-## PROJECTS
-
-**Profile Router** — TypeScript, Node.js, JSON Schema
-github.com/sahidhh/profile-router
-
-- Extension for an AI coding agent that classifies every prompt against a keyword-scored profile table and routes it to the appropriate model, reasoning level, toolset, and rule set.
-- Classifier uses word-boundary keyword scoring with zero LLM calls, so routing itself costs nothing; ships 7 profiles (lookup, hotfix, investigation, implementation, architecture, review, premium) with a fallback chain per tier.
-- Reduced inference spend by roughly 60% by routing retrieval and quick-fix prompts to cheap models while reserving stronger models for architecture and review work.
-- Wrote unit, reachability, and regression tests that fail the build when a new keyword makes one profile outrank another on its own trigger prompt.
-
-**Job Discovery Pipeline** — TypeScript, Next.js 15, Supabase, GitHub Actions, OpenRouter
-github.com/sahidhh/job-scraper
-
-- Scrapes six job boards (Greenhouse, Lever, Ashby, Wellfound, RemoteOK, MyCareersFuture) twice daily on GitHub Actions, normalizing every source into one schema with a stable ID for deduplication.
-- Scores postings in two stages: a free keyword-overlap gate against skills extracted from an uploaded resume PDF, then an LLM call with reasoning only for postings above the threshold; scores persist per (job, role) so re-runs never re-score.
-- Delivers one Telegram digest per run with inline Apply buttons; a notifications log guarantees at-most-once delivery across workflow retries.
-- Dashboard surfaces skill gaps (what matched jobs need that the resume lacks) and skill demand across matches.
-**Learning Card Generator** — TypeScript, JSON Schema, jsPDF
-github.com/sahidhh/learning-card-generator
-
-- Mobile-first micro-learning web app that renders any topic as a scrollable feed of bite-sized learning cards.
-- Defined a typed JSON schema of 10+ card types (concept, analogy, code, quiz, comparison, recap) as the contract between an LLM content generator and the renderer.
-- Implemented ZIP export producing a vector-text PDF, JSON, and Markdown, replacing a screenshot-based PDF with selectable, searchable output ~10x smaller in file size.
+Backend-leaning engineer with 2+ years on .NET 8, C#, PostgreSQL and Azure, plus Python for document processing, load testing and LLM work, and agent tooling on my own time. Available to join within 15 days.
 
 ---
 
 ## TECHNICAL SKILLS
 
-**Languages:** Python, C#, TypeScript, JavaScript, SQL
+**Languages:** Python, C#, TypeScript, JavaScript, SQL, Java, Kotlin
+**AI and agents:** prompt engineering, LLM integration, agentic development, agent harness design
+**Backend:** .NET 8, ASP.NET Core, Entity Framework Core, MediatR, CQRS, Clean Architecture, REST APIs, microservices, FastAPI, Node.js
+**Databases:** PostgreSQL, SQL Server, MongoDB, SQLite
+**Cloud and tools:** Azure (Blob Storage, Entra ID), AWS, Docker, Jenkins, Git, GitHub Actions, unit, integration and load testing
 
-**AI & Data:** LLM API integration (Gemini, OpenAI-compatible), prompt design, token-cost optimization, sentence-transformers embeddings, PyMuPDF, structured JSON extraction
+---
 
-**Backend:** .NET / ASP.NET Core Web API, CQRS, Clean Architecture, MediatR, Entity Framework Core, REST APIs, Node.js
+## EXPERIENCE
 
-**Databases:** PostgreSQL, SQL Server, SQLite
+**Propel Technology Group Inc**, Chennai | Aug 2024 to Sep 2026
 
-**Cloud & Tooling:** Azure (Blob Storage, Entra ID), Docker, Git, GitHub Actions, Postman
+L2 Software Engineer (Aug 2026 to Sep 2026), promoted from Back End Developer (Aug 2024 to Aug 2026). Worked on a B2B tax-review platform and a healthcare and e-commerce platform.
 
-**Frontend:** Angular, React.js, TypeScript
+- Built the backend of a PDF form-comparison pipeline. A .NET API stores files in Azure Blob and tracks status, and a Python worker extracts text, compares versions and writes an LLM summary of the changes. It handles 500+ documents per cycle.
+- Wrote Python load tests that I ran against staging and UAT servers for several projects, plus unit and integration tests on a microservice-based tax platform.
+- Moved a production backend from a layered design to CQRS and Clean Architecture (MediatR, EF Core, Unit of Work). Adding a new review tool dropped from about 2 weeks to 4 days.
+- Cut reporting endpoints from about 8 seconds to under 2 with split queries and shared query helpers, and removed N+1 queries on the read side.
+
+**Frontend Developer Intern**, Mallow Technologies, Coimbatore | Jun 2023 to Dec 2023
+
+- Built responsive React and Redux screens for a time-tracking app and connected them to REST APIs.
+
+---
+
+## PROJECTS
+
+**Job Discovery Pipeline** | Next.js, TypeScript, Supabase, GitHub Actions
+
+- Scrapes six job boards twice a day, scores postings in two stages (keywords first, LLM only for those that pass) and sends one Telegram digest. A notifications log gives at-most-once delivery. Live at job-scraper-liart.vercel.app.
+
+**pi-lean and pi-fleet** | TypeScript, Node, systemd, micro-VM sandbox
+
+- Sandboxed coding-agent runner: agent tools execute in a micro-VM on a throwaway copy of the project, and I review one exported patch. Prompt and tool tuning cut input tokens 40 to 70 percent, and a 6-task eval passes 12 of 12 runs.
 
 ---
 
 ## EDUCATION
 
-**B.Tech, Information Technology** — Karpagam College of Engineering, Coimbatore | 2020 – 2024
+**B.Tech, Information Technology**, Karpagam College of Engineering, Coimbatore | 2020 to 2024

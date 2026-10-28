@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Job Discovery Pipeline — Sahidhullah H</title>
+<title>Job Discovery Pipeline | Sahidhullah H</title>
 <meta name="description" content="Case study: six job boards, two-stage scoring, one Telegram digest, at-most-once delivery.">
 <link rel="canonical" href="https://sahidhh.github.io/portfolio/projects/job-pipeline.html">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Job Discovery Pipeline — Sahidhullah H">
+<meta property="og:title" content="Job Discovery Pipeline | Sahidhullah H">
 <meta property="og:description" content="Case study: six job boards, two-stage scoring, one Telegram digest, at-most-once delivery.">
 <meta property="og:url" content="https://sahidhh.github.io/portfolio/projects/job-pipeline.html">
 <meta name="twitter:card" content="summary">
@@ -70,7 +70,7 @@ flowchart LR
   N -->|digest, Apply buttons| TG[Telegram]
   W[Next.js dashboard] <-->|server actions| DB
       </pre>
-      <p style="max-width:66ch"><b>Stage 1</b> is skill overlap between the posting and skills extracted from my uploaded resume PDF — free, runs on everything. <b>Stage 2</b> calls an LLM with reasoning only for postings above the keyword threshold. Scores persist per (job, role) pair so a re-run never re-scores. A role I type in is expanded once by the LLM into related titles and cached forever; that expansion scopes scraping, scoring and notifications.</p>
+      <p style="max-width:66ch"><b>Stage 1</b> is skill overlap between the posting and skills extracted from my uploaded resume PDF. It is free and runs on everything. <b>Stage 2</b> calls an LLM with reasoning only for postings above the keyword threshold. Scores persist per (job, role) pair so a re-run never re-scores. A role I type in is expanded once by the LLM into related titles and cached forever; that expansion scopes scraping, scoring and notifications.</p>
     </div>
   </div>
 
@@ -81,11 +81,11 @@ flowchart LR
         <div>
           <div class="ui"><div class="ui-bar"><i></i><i></i><i></i><span>/dashboard · sorted by score · India + remote</span></div>
             <div class="ui-body"><div class="ui-list">
-              <div><span>Backend Engineer (.NET) — Fintech, remote EU</span><em><span class="chip hi">0.91</span> Lever</em></div>
-              <div><span>Software Engineer II, Platform — SaaS, Singapore</span><em><span class="chip hi">0.86</span> Greenhouse</em></div>
-              <div><span>Python Engineer, Document AI — remote</span><em><span class="chip hi">0.82</span> Ashby</em></div>
-              <div><span>Full-stack Developer — Agency, India</span><em><span class="chip">0.61</span> RemoteOK</em></div>
-              <div><span>Senior Java Architect — Bank, UAE</span><em><span class="chip">0.34</span> MyCareersFuture</em></div>
+              <div><span>Backend Engineer (.NET) · Fintech, remote EU</span><em><span class="chip hi">0.91</span> Lever</em></div>
+              <div><span>Software Engineer II, Platform · SaaS, Singapore</span><em><span class="chip hi">0.86</span> Greenhouse</em></div>
+              <div><span>Python Engineer, Document AI · remote</span><em><span class="chip hi">0.82</span> Ashby</em></div>
+              <div><span>Full-stack Developer · Agency, India</span><em><span class="chip">0.61</span> RemoteOK</em></div>
+              <div><span>Senior Java Architect · Bank, UAE</span><em><span class="chip">0.34</span> MyCareersFuture</em></div>
             </div></div></div>
           <p class="ui-cap"><b>Dashboard.</b> Filter by location, source, status, score; bulk-move Interested → Applied.</p>
         </div>
@@ -103,7 +103,7 @@ flowchart LR
         </div>
         <div>
           <div class="ui"><div class="ui-bar"><i></i><i></i><i></i><span>Telegram · Job Digest</span></div>
-            <div class="ui-body"><div class="tg"><b>Run 06:00 UTC — 3 high, 5 worth reviewing</b><br>🟢 0.91 Backend Engineer (.NET) — Fintech<br>🟢 0.86 Software Engineer II — SaaS<br>🟢 0.82 Python Engineer, Document AI<div class="btns"><span>Apply ↗</span><span>Apply ↗</span><span>Apply ↗</span><span>Worth reviewing (5)</span><span>Dashboard</span></div></div></div></div>
+            <div class="ui-body"><div class="tg"><b>Run 06:00 UTC · 3 high, 5 worth reviewing</b><br>🟢 0.91 Backend Engineer (.NET) · Fintech<br>🟢 0.86 Software Engineer II · SaaS<br>🟢 0.82 Python Engineer, Document AI<div class="btns"><span>Apply ↗</span><span>Apply ↗</span><span>Apply ↗</span><span>Worth reviewing (5)</span><span>Dashboard</span></div></div></div></div>
           <p class="ui-cap"><b>Telegram digest.</b> One message per run; buttons deep-link to the posting.</p>
         </div>
       </div>

@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PDF Diff Tool — Sahidhullah H</title>
-<meta name="description" content="Case study: word-level PDF diffing with OCR fallback — the same problem as my day job, the opposite approach.">
+<title>PDF Diff Tool | Sahidhullah H</title>
+<meta name="description" content="Case study: word-level PDF diffing with OCR fallback, the same problem as my day job with the opposite approach.">
 <link rel="canonical" href="https://sahidhh.github.io/portfolio/projects/pdf-diff.html">
 <meta property="og:type" content="website">
-<meta property="og:title" content="PDF Diff Tool — Sahidhullah H">
-<meta property="og:description" content="Case study: word-level PDF diffing with OCR fallback — the same problem as my day job, the opposite approach.">
+<meta property="og:title" content="PDF Diff Tool | Sahidhullah H">
+<meta property="og:description" content="Case study: word-level PDF diffing with OCR fallback, the same problem as my day job with the opposite approach.">
 <meta property="og:url" content="https://sahidhh.github.io/portfolio/projects/pdf-diff.html">
 <meta name="twitter:card" content="summary">
 <meta name="theme-color" content="#0c111c">
@@ -28,7 +28,7 @@
   <div class="cs-head">
     <div>
       <h1>PDF Diff Tool: same problem as work, the opposite approach</h1>
-      <p class="sub">At work I built a config-driven form-comparison pipeline for a client's tax-review platform. On my own time I built a second tool from scratch to test the opposite idea: no per-form config at all — just words, their boxes, and a diff.</p>
+      <p class="sub">At work I built a config-driven form-comparison pipeline for a client's tax-review platform. On my own time I built a second tool from scratch to test the opposite idea: no per-form config at all, just words, their boxes and a diff.</p>
     </div>
     <div class="meta">
       <div><b>Role</b> <span>Solo; the work pipeline was a team build I led on the backend</span></div>
@@ -41,8 +41,8 @@
   <div class="cs-body">
     <h2>Why I built it</h2>
     <div>
-      <p>The client project came first. Reviewers on a tax platform compared a new version of an IRS form against last year's by eye — two PDFs, two monitors, a highlighter. We built comparison into the product: a JSON locator schema per form says where each field sits, a Python worker extracts those fields and compares them, a .NET API tracks status and stores the result. It works, and onboarding a new form takes under a day.</p>
-      <p>But it takes that day. Every new form is a config file someone writes and maintains. I kept wondering what you'd get by skipping the schema entirely and diffing the words themselves — worse precision, maybe, but zero setup. So I built that version at home to find out.</p>
+      <p>The client project came first. Reviewers on a tax platform compared a new version of an IRS form against last year's by eye, with two PDFs, two monitors and a highlighter. We built comparison into the product: a JSON locator schema per form says where each field sits, a Python worker extracts those fields and compares them, a .NET API tracks status and stores the result. It works, and onboarding a new form takes under a day.</p>
+      <p>But it takes that day. Every new form is a config file someone writes and maintains. I kept wondering what you'd get by skipping the schema entirely and diffing the words themselves: worse precision, maybe, but zero setup. So I built that version at home to find out.</p>
     </div>
   </div>
 
@@ -92,8 +92,8 @@ flowchart LR
         <div>
           <div class="ui"><div class="ui-bar"><i></i><i></i><i></i><span>Text view · same opcodes</span></div>
             <div class="demo-body" style="font-size:12px">
-              <div><span class="dim">p1</span> Net operating loss deduction <del>(see instructions)</del><br><span class="dim">p1</span> Total tax (Schedule J, Part I, line <del>11</del>)<br><span class="dim">p2</span> <span class="dim">— no changes —</span></div>
-              <div><span class="dim">p1</span> Net operating loss deduction <ins>(attach statement)</ins><br><span class="dim">p1</span> Total tax (Schedule J, Part I, line <ins>12</ins>)<br><span class="dim">p2</span> <ins>Part IV — Reconciliation of Net Income</ins></div>
+              <div><span class="dim">p1</span> Net operating loss deduction <del>(see instructions)</del><br><span class="dim">p1</span> Total tax (Schedule J, Part I, line <del>11</del>)<br><span class="dim">p2</span> <span class="dim">(no changes)</span></div>
+              <div><span class="dim">p1</span> Net operating loss deduction <ins>(attach statement)</ins><br><span class="dim">p1</span> Total tax (Schedule J, Part I, line <ins>12</ins>)<br><span class="dim">p2</span> <ins>Part IV: Reconciliation of Net Income</ins></div>
             </div></div>
           <p class="ui-cap"><b>Text view.</b> One CSS class on <code>&lt;body&gt;</code> toggles between the two; both ship in the same HTML.</p>
         </div>
@@ -108,7 +108,7 @@ flowchart LR
     <div>
       <ul class="decisions">
         <li><b>Diff text, never pixels.</b> The rendered page is only a backdrop. Boxes ride along with words as percentages of the page so they scale with the image.</li>
-        <li><b>A <code>clean()</code> step before diffing.</b> Drop tokens with no alphanumeric character and runs of 3+ identical single-character tokens. On a 3-page Schedule M-3 that removes ~27% of tokens — all noise. A lone <code>a</code>/<code>b</code> line label survives because only runs are dropped.</li>
+        <li><b>A <code>clean()</code> step before diffing.</b> Drop tokens with no alphanumeric character and runs of 3+ identical single-character tokens. On a 3-page Schedule M-3 that removes ~27% of tokens, all of it noise. A lone <code>a</code>/<code>b</code> line label survives because only runs are dropped.</li>
         <li><b><code>autojunk=False</code>.</b> difflib's default treats common words as junk and the diff degrades on repetitive form text. Found the hard way.</li>
         <li><b>OCR only when needed, and say so.</b> A page with no text layer is rasterized at 300 dpi and read with Tesseract; words under confidence 40 are discarded. Each column header states how its text was obtained and OCR pages get a badge, so reviewers know when to trust it less.</li>
         <li><b>Engine has no web dependency.</b> <code>diff_engine.compare(bytes, bytes)</code> is importable on its own and ships a one-line self-check. Same shape as the worker at work, so the two are easy to compare.</li>
@@ -120,13 +120,13 @@ flowchart LR
     <h2>Two approaches, side by side</h2>
     <div>
       <div class="demo">
-        <div class="demo-head"><span>Work — config-driven</span><span>Side project — schema-free</span></div>
+        <div class="demo-head"><span>Work: config-driven</span><span>Side project: schema-free</span></div>
         <div class="demo-body" style="font-family:var(--sans);font-size:14px;line-height:1.5">
           <div>Locator schema per form (~1 day each)<br>Field-level: "Line 31 changed 11 → 12"<br>Knows which fields matter<br>LLM summary per change<br>.NET API · Azure Blob · Python worker · PostgreSQL<br>500+ documents per review cycle</div>
           <div>No setup; any two PDFs<br>Word-level: what text changed, where on the page<br>Treats every word equally; noise filtered by <code>clean()</code><br>No LLM<br>FastAPI · PyMuPDF · Tesseract · difflib, in memory<br>Two documents at a time</div>
         </div>
       </div>
-      <p>Where it landed: the schema-free diff is the right first look — "did anything change on this page?" — and the config-driven pipeline is the right answer for reviewers who need to know <i>which field</i> changed. I'd use the first to decide whether the second is worth running.</p>
+      <p>Where it landed: the schema-free diff is the right first look ("did anything change on this page?"), and the config-driven pipeline is the right answer for reviewers who need to know <i>which field</i> changed. I'd use the first to decide whether the second is worth running.</p>
       <div class="results">
         <div><b>500+</b><span>documents per cycle on the work pipeline</span></div>
         <div><b>~27%</b><span>tokens removed as noise before diffing</span></div>

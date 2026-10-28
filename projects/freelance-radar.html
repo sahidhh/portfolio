@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Freelance Radar — Sahidhullah H</title>
+<title>Freelance Radar | Sahidhullah H</title>
 <meta name="description" content="Case study: a local-first freelance CRM with no server, on purpose.">
 <link rel="canonical" href="https://sahidhh.github.io/portfolio/projects/freelance-radar.html">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Freelance Radar — Sahidhullah H">
+<meta property="og:title" content="Freelance Radar | Sahidhullah H">
 <meta property="og:description" content="Case study: a local-first freelance CRM with no server, on purpose.">
 <meta property="og:url" content="https://sahidhh.github.io/portfolio/projects/freelance-radar.html">
 <meta name="twitter:card" content="summary">
@@ -28,7 +28,7 @@
   <div class="cs-head">
     <div>
       <h1>Freelance Radar: a CRM with no server, on purpose</h1>
-      <p class="sub">Find leads, qualify them, draft outreach, track follow-ups — entirely in the browser. Every status has exactly one next action, so the dashboard always tells you what to do.</p>
+      <p class="sub">Find leads, qualify them, draft outreach and track follow-ups, entirely in the browser. Every status has exactly one next action, so the dashboard always tells you what to do.</p>
     </div>
     <div class="meta">
       <div><b>Role</b> <span>Solo</span></div>
@@ -48,7 +48,7 @@
   <div class="cs-body">
     <h2>The problem</h2>
     <div>
-      <p>Not "build a CRM" — build the smallest thing that answers <b>"what should I do next?"</b> every time it opens, and refuse every feature that needs a server to work.</p>
+      <p>Build the smallest thing that answers <b>"what should I do next?"</b> every time it opens, and refuse every feature that needs a server to work. A full CRM was never the goal.</p>
     </div>
   </div>
 
@@ -65,7 +65,7 @@ flowchart LR
   FU --> P[Project\nvalue, dates, payments]
   L & Q & O & FU & P --- DB[(IndexedDB\nleads · outreach · projects · activities)]
       </pre>
-      <p style="max-width:66ch">Pages never touch IndexedDB directly — a <code>db/</code> layer owns the four stores and export/import. Pure logic (next action, outreach templates, DM budget pacing, feed normalisers) lives in <code>lib/</code> and is tested against captured real API responses.</p>
+      <p style="max-width:66ch">Pages never touch IndexedDB directly: a <code>db/</code> layer owns the four stores and export/import. Pure logic (next action, outreach templates, DM budget pacing, feed normalisers) lives in <code>lib/</code> and is tested against captured real API responses.</p>
     </div>
   </div>
 
@@ -78,12 +78,12 @@ flowchart LR
             <div class="ui-body">
               <div class="tiles"><div class="tile"><small>Pipeline value</small><b>$4,200</b></div><div class="tile"><small>Qualified</small><b>6</b></div><div class="tile"><small>Follow-ups today</small><b>2</b></div></div>
               <div class="ui-list">
-                <div><span>Follow up — Northwind Bakery (no reply, day 4)</span><em>today</em></div>
-                <div><span>Send outreach — Kavya Dental, draft ready</span><em>today</em></div>
-                <div><span>Research — Harbor Yoga Studio</span><em>Sep 19</em></div>
+                <div><span>Follow up: Northwind Bakery (no reply, day 4)</span><em>today</em></div>
+                <div><span>Send outreach: Kavya Dental, draft ready</span><em>today</em></div>
+                <div><span>Research: Harbor Yoga Studio</span><em>Sep 19</em></div>
               </div>
             </div></div>
-          <p class="ui-cap"><b>Dashboard.</b> Not a chart page — a list of verbs, ordered by due date.</p>
+          <p class="ui-cap"><b>Dashboard.</b> A list of verbs ordered by due date instead of a page of charts.</p>
         </div>
         <div>
           <div class="ui"><div class="ui-bar"><i></i><i></i><i></i><span>Pipeline</span></div>
@@ -107,7 +107,7 @@ flowchart LR
           <p class="ui-cap"><b>Lead detail.</b> The audit gives a concrete pitch; the app never sends anything itself.</p>
         </div>
       </div>
-      <p style="color:var(--ink-2);font-size:14px">Prototype screens with sample leads; a fresh install is empty by design — nothing is stored anywhere but your browser.</p>
+      <p style="color:var(--ink-2);font-size:14px">Prototype screens with sample leads; a fresh install is empty by design, and nothing is stored anywhere but your browser.</p>
     </div>
   </div>
 
@@ -116,7 +116,7 @@ flowchart LR
     <h2>Decisions that mattered</h2>
     <div>
       <ul class="decisions">
-        <li><b>One next action per status.</b> The pipeline isn't a Kanban for its own sake; each column implies a verb. The dashboard is a list of verbs.</li>
+        <li><b>One next action per status.</b> Each pipeline column implies a verb. The dashboard is a list of those verbs.</li>
         <li><b>Deliberately excluded, in writing:</b> auth, server DB, automated sending, LinkedIn/Upwork automation, scraping, AI agents. External services are used by hand, never as runtime dependencies. The list is in <code>docs/requirements.md</code> so future-me can't quietly add them.</li>
         <li><b>Adversarial reviews before each phase.</b> An HN parser and an Instagram lead-sourcing pipeline were designed, reviewed, and cut. The review notes are in the repo alongside the plans that survived.</li>
         <li><b>Export with schema versioning.</b> Local-first means the data can be lost with the browser profile. JSON and CSV export carry a version so imports stay valid after the schema changes.</li>
@@ -128,9 +128,9 @@ flowchart LR
     <h2>Results</h2>
     <div class="wide">
       <div class="results">
-        <div><b>$0</b><span>infrastructure — static hosting, no backend</span></div>
+        <div><b>$0</b><span>infrastructure: static hosting, no backend</span></div>
         <div><b>0</b><span>bytes of prospect data leave the device</span></div>
-        <div><b>100%</b><span>of data exportable — JSON and CSV, schema-versioned</span></div>
+        <div><b>100%</b><span>of data exportable: JSON and CSV, schema-versioned</span></div>
       </div>
     </div>
   </div>
