@@ -47,7 +47,7 @@
 
     <section id="about" class="about">
       <h2 class="sticky">About</h2>
-      <p>I'm a full stack .NET engineer in Chennai with 2+ years of experience. At Propel Technology Group Inc (Aug 2024 to Sep 2026) I started as a Back End Developer and moved up to L2 Software Engineer in Aug 2026. I worked on a B2B tax-review platform and a healthcare and e-commerce platform: .NET 8, EF Core, PostgreSQL and Azure, Angular and React front ends, and Python for document work.</p>
+      <p>I'm a full stack .NET engineer in Chennai with 2+ years of experience. At Propel Technology Group Inc (Aug 2024 to Sep 2026) I started as a Back End Developer and moved up to L2 Software Engineer in Aug 2026. I worked on a B2B tax-review platform and a healthcare and e-commerce platform: .NET 8, EF Core, PostgreSQL and Azure, Angular and React front ends, and Python for document work. I left Propel in Sep 2026 when project work slowed down. I am looking for a team with steady work and am open to contract work now.</p>
       <p>Recent results: moved a production backend to CQRS and Clean Architecture (adding a review tool dropped from about 2 weeks to 4 days), cut reporting endpoints from ~8 s to under 2 s, and built the backend of a PDF form-comparison pipeline that processes 500+ documents per cycle.</p>
       <p>Outside work I build small tools that run on their own: a job-discovery pipeline, a local-first CRM, and a hosted medicine-inventory app built for a family member, handed over and live since October 2026 with nightly verified backups.</p>
       <div class="facts">
@@ -79,7 +79,7 @@
         </ul>
     <p style="margin-top:14px"><b>Healthcare and e-commerce platform.</b></p>
     <ul class="pts">
-          <li><strong>Worked across the whole system</strong>: a patient app for Android and iOS, web portals for healthcare data admins, receptionists and doctors, and a pharmacy back office, all on one .NET backend and one PostgreSQL schema.</li>
+          <li><strong>Worked across the whole system</strong>, an online platform for an affiliated hospital and medical group: a patient app for Android and iOS (appointments, medicine orders, lab tests, insurance claims and payments), web portals for receptionists, pharmacy, doctors, delivery partners and healthcare data admins, and a pharmacy back office, all on one .NET backend and one PostgreSQL schema.</li>
           <li><strong>Doctor scheduling</strong> with a custom calendar and role-based access control; in-app e-commerce and lab-test booking; a pharmacy portal for stock, orders, payments and prescription review.</li>
           <li><strong>Designed 20+ REST APIs</strong> (orders, appointments, lab tests, payments, prescriptions) and cut response times by about 80% with query tuning and caching. Python services generate and process documents such as prescriptions and bills.</li>
         </ul>
@@ -146,6 +146,15 @@
   </div>
 </div>
 <div class="item">
+  <div class="when">Case study</div>
+  <div>
+    <h3><a href="projects/pi-agentic.html">Sandboxed Coding Agents <span class="arr">↗</span></a></h3>
+    <p>Coding agents on free models whose tools only run inside a disposable micro-VM. Changes come back as a patch I review, and a job counts as done only when a check script passes. <b>12/12 eval runs pass</b> on a small task set, refusals included.</p>
+    <ul class="tags"><li>Pi agent</li><li>TypeScript</li><li>Gondolin VM</li><li>PowerShell</li></ul>
+    <div class="links"><a href="projects/pi-agentic.html">Case study</a></div>
+  </div>
+</div>
+<div class="item">
   <div class="when">Repo</div>
   <div>
     <h3><a href="https://github.com/sahidhh/lenovo-battery-tray" target="_blank" rel="noopener">Lenovo Battery Tray <span class="arr">↗</span></a></h3>
@@ -186,7 +195,7 @@
     <table class="auto">
       <tr><th>Task</th><th>What runs instead</th><th>Cadence</th></tr>
       <tr><td>Checking six job boards</td><td>GitHub Actions scrapes Greenhouse, Lever, Ashby, Wellfound, RemoteOK and MyCareersFuture, scores against my resume, posts a Telegram digest. Separate workflows validate sources, re-score after a resume change, and verify production.</td><td>06:00 and 14:00 UTC</td></tr>
-      <tr><td>Weekly timesheet entry</td><td>A script rebuilds the HR timesheet import file from an Azure DevOps work-item CSV export, packaged as a Claude Code skill so anyone on the team can run it.</td><td>Weekly, ~2 min instead of ~30</td></tr>
+      <tr><td>Weekly timesheet entry</td><td>A script rebuilds the HR timesheet import file from an Azure DevOps work-item CSV export, built as a Claude Code skill I use myself and shared with a few teammates.</td><td>Weekly, ~2 min instead of ~30</td></tr>
       <tr><td>Backing up the inventory database</td><td>A GitHub Action dumps the D1 database, rebuilds it as a check, and fails on row-count drops.</td><td>Nightly</td></tr>
       <tr><td>Release packaging</td><td><code>release.ps1</code> zips, versions and tags; <code>install.ps1</code> drops a Startup shortcut and nothing else.</td><td>Per release</td></tr>
     </table>
@@ -225,7 +234,7 @@
       <h2 class="sticky">Contact</h2>
       <div class="offer">
         <h3>Work with me (contract)</h3>
-        <p>Backend APIs and databases (.NET or Python + PostgreSQL), PDF/document processing, and scheduled automations such as scrapers, digests and backups. Typical engagement: a fixed-scope 1–4 week build or ongoing part-time hours, IST with US/EU overlap.</p>
+        <p>Backend APIs and databases (.NET or Python + PostgreSQL), PDF/document processing, and scheduled automations such as scrapers, digests and backups. Typical engagement: a fixed-scope 1-4 week build or ongoing part-time hours, IST with US/EU overlap.</p>
         <p>How it goes: a 30-minute call → written scope and price → weekly demo → handover with docs and backups.</p>
       </div>
       <p class="big"><a href="mailto:sahidhullah@gmail.com?subject=Project%20enquiry">Email sahidhullah@gmail.com</a></p>

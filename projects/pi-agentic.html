@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sandboxed Coding Agents | Sahidhullah H</title>
+<meta name="description" content="Case study: coding agents on free models, tools confined to a micro-VM, done means a scripted check passed.">
+<link rel="canonical" href="https://sahidhh.github.io/portfolio/projects/pi-agentic.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Sandboxed Coding Agents | Sahidhullah H">
+<meta property="og:description" content="Case study: coding agents on free models, tools confined to a micro-VM, done means a scripted check passed.">
+<meta property="og:url" content="https://sahidhh.github.io/portfolio/projects/pi-agentic.html">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#0c111c">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2222%22 fill=%22%230c111c%22/><text x=%2250%22 y=%2270%22 font-size=%2258%22 text-anchor=%22middle%22 fill=%22%23e6b96a%22 font-family=%22Inter,Segoe UI,sans-serif%22 font-weight=%22700%22>S</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.15.0/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark",themeVariables:{background:"transparent",primaryColor:"#1a2130",primaryTextColor:"#f3f5f9",primaryBorderColor:"#3a4a66",lineColor:"#9aa4b5",fontFamily:"Inter, sans-serif"},flowchart:{htmlLabels:true,curve:"basis"}});</script>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<a class="skip" href="#main">Skip to content</a>
+<main class="cs" id="main">
+  <p class="crumb"><a href="../index.html#projects">← Sahidhullah H · Projects</a></p>
+  <div class="cs-head">
+    <div>
+      <h1>Sandboxed Coding Agents: free models, checked output</h1>
+      <p class="sub">Two personal tools around the Pi coding agent. pi-lean is a backup coding runtime whose tools only run inside a disposable micro-VM. pi-fleet runs small agent jobs (recon, review, small edits, ops reports) on free models, on demand from my laptop or on a schedule on a home server. In both, a job is done only when a script says so.</p>
+    </div>
+    <div class="meta">
+      <div><b>Role</b> <span>Solo</span></div>
+      <div><b>Stack</b> <span>Pi coding agent, TypeScript extensions, Gondolin micro-VM (QEMU in WSL), PowerShell, Node test runner, systemd</span></div>
+      <div><b>Status</b> <span>In personal use since Sep 2026. Private repos; walkthrough on request.</span></div>
+    </div>
+  </div>
+
+  <div class="cs-body">
+    <h2>Why I built it</h2>
+    <div>
+      <p>I use Claude Code daily and sometimes run out of usage mid-task. A lot of what an agent does is low stakes: find where something is defined, review a diff, reformat a doc. I wanted that work on free models, and I wanted a fallback that could still edit code when Claude was unavailable.</p>
+    </div>
+  </div>
+
+  <div class="cs-body">
+    <h2>The problem</h2>
+    <div>
+      <p>Free models are weaker, and the free router does not say which model served a request. A weak model with shell access on my laptop is a risk, and its "done, tests pass" message is not evidence. Pi itself ships with no sandbox, and its extensions run with full host permissions.</p>
+    </div>
+  </div>
+
+  <div class="cs-body">
+    <h2>How it works</h2>
+    <div class="wide">
+      <pre class="mermaid">
+flowchart LR
+  U[me or Claude Code] --> P[Pi\nbuilt-in tools off]
+  P <-->|chat + tool calls| M[free model]
+  P -->|code_* tools| VM[Gondolin micro-VM]
+  VM -->|mount| W[(disposable copy\nof the repo)]
+  W -->|export patch| R[patch I review]
+  P --> C[check script\npass / fail]
+  C --> L[(runs log)]
+      </pre>
+      <p style="max-width:66ch"><b>Sandbox.</b> pi-lean turns off Pi's built-in bash, edit and write tools. The model only sees seven <code>code_*</code> tools (grep, read, edit, write, test, sh, diff) that run inside a Gondolin micro-VM against a disposable copy of the project. Paths are checked, <code>.git</code> is blocked, and output is capped by lines, bytes and seconds. <b>Patch review.</b> The agent never touches the real repo. A script exports its changes as a patch, and I read the diff before applying it. pi-fleet's edit job works the same way in a separate git worktree, gated on at most two files changed and main untouched. <b>Done-checks.</b> Every pi-fleet job has a small check script, and each run appends pass or fail to a log. A failed check is a non-zero exit, whatever the model said.</p>
+    </div>
+  </div>
+
+  <div class="cs-body">
+    <h2>Decisions that mattered</h2>
+    <div>
+      <ul class="decisions">
+        <li><b>The VM is the boundary.</b> <code>code_sh</code> and <code>code_test</code> run arbitrary code, so I did not try to filter commands. I kept secrets and private code out of the workspace instead.</li>
+        <li><b>Host-side verification.</b> The eval re-runs tests and diffs the workspace on the host. The model's report is never the score.</li>
+        <li><b>Short prompt, few tools.</b> A 206-word system prompt replaces Pi's default, and specialist sub-agents stay opt-in. Every registered tool costs schema tokens on every turn.</li>
+        <li><b>Flags, not a profile.</b> The launcher passes flags to Pi, so global Pi and Claude settings stay untouched and no credentials get copied.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="cs-body">
+    <h2>What broke</h2>
+    <div>
+      <p>The first model run reported results it had made up. The cause was mine: <code>wsl.exe</code> re-parsed each command in a host shell, expanding variables and dropping arguments, so tools failed and the model filled the gap. Scripts now go to the guest base64-encoded. The eval checker also had three bugs early on, and the first results table was wrong because of them. Since then I test a scorer on known-good and known-bad runs before I trust it.</p>
+    </div>
+  </div>
+
+  <div class="cs-body">
+    <h2>Results</h2>
+    <div class="wide">
+      <div class="results">
+        <div><b>12/12</b><span>eval runs pass on the free router: 6 tasks × 2 runs, including two "target does not exist" refusals</span></div>
+        <div><b>11</b><span>boundary tests run against the real sandbox</span></div>
+        <div><b>7</b><span>sandbox tools; Pi's own shell and edit tools are off</span></div>
+      </div>
+      <p style="max-width:66ch;color:var(--ink-2);font-size:14px">Two runs per task on a router with hidden backends is a signal, not proof. Before the prompt rewrite the refusal task failed twice: the model edited an unrelated file and invented a cause.</p>
+    </div>
+  </div>
+
+  <div class="cs-body">
+    <h2>Not built yet</h2>
+    <div>
+      <ul class="decisions">
+        <li><b>Network allowlist.</b> The VM's outbound network is not blocked yet, which is why nothing private goes in the workspace.</li>
+        <li><b>Paid-model comparison.</b> The eval takes a <code>--model</code> flag for a cheap coder trial; I have not run it.</li>
+        <li><b>Specialist agents.</b> Two exist and are opt-in. I have no measured benefit from them, so they stay off by default.</li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="ask">Want the longer version, or the parts I left out? <a href="mailto:sahidhullah@gmail.com">sahidhullah@gmail.com</a></p>
+  <div class="next"><a href="freelance-radar.html">← Freelance Radar</a><a href="../index.html#projects">All projects →</a></div>
+</main>
+</body>
+</html>
